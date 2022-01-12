@@ -1,0 +1,1 @@
+export { PIXIGame } from './game';
