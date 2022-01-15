@@ -1,1 +1,1 @@
-export { PIXIGame } from './game';
+export { GameInstance } from './game';

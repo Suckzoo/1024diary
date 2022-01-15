@@ -1,11 +1,6 @@
-import { PIXIGame } from "./game";
+import { GameInstance } from "./game";
 
 (function () {
-    const myGame = new PIXIGame({
-        documentBody: document.body,
-        width: 800,
-        height: 600
-    });
-    myGame.load();
-    myGame.run();
+    const game = GameInstance(document.body, 800, 600);
+    game.run();
 })();
