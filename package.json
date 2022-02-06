@@ -2,12 +2,11 @@
   "name": "huvafen",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
-    "build": "parcel build"
+    "build": "parcel build src/index.html",
   },
   "repository": {
     "type": "git",
@@ -24,6 +23,7 @@
     "parcel": "^2.1.1"
   },
   "dependencies": {
+    "@swc/helpers": "^0.2.14",
     "pixi.js": "^6.2.1",
     "uuid": "^3.4.0"
   }
