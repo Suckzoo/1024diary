@@ -1,8 +1,8 @@
 import * as PIXI from "pixi.js";
 import { GameInstance } from "..";
 import { CCJ_HOVER_TEXTURE, CCJ_TEXTURE, GALLERY_HOVER_TEXTURE, GALLERY_TEXTURE, LOGO_TEXTURE, PLAY_HOVER_TEXTURE, PLAY_TEXTURE } from "../../assets";
-import { ButtonObject, CallbacksOnEvent, TexturesOnEvent } from "../../gameobject/ButtonObject";
-import { UIObject } from "../../gameobject/UIObject";
+import { ButtonObject, CallbacksOnEvent, TexturesOnEvent } from "../../gameobject/UI/ButtonObject";
+import { UISpriteObject } from "../../gameobject/UI/UISpriteObject";
 import { PIXIApp } from "../App";
 import { AbstractScene } from "./Scene";
 
@@ -26,7 +26,7 @@ export class MainScene extends AbstractScene {
         super(app);
     }
     load(): void {
-        const logo = new UIObject('logo', 150, 100, 500, 150, PIXI.Texture.from(LOGO_TEXTURE));
+        const logo = new UISpriteObject('logo', 150, 100, 500, 150, PIXI.Texture.from(LOGO_TEXTURE));
         this.add(logo);
         const playButtonTextures: TexturesOnEvent = {
             onUp: PIXI.Texture.from(PLAY_TEXTURE),

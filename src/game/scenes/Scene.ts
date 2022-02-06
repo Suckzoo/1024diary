@@ -24,6 +24,14 @@ export abstract class AbstractScene {
         this.container.removeChild(obj.PIXIObject);
         this.objects.delete(obj.stringify());
     }
+    removeById(id: string) {
+        const obj = this.objects.get(id);
+        if (!obj) {
+            throw new Error("Object with id " + id + " not found");
+        }
+        this.container.removeChild(obj.PIXIObject);
+        this.objects.delete(id);
+    }
     destroy(): void {
         this.container.destroy();
     }

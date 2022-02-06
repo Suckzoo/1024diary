@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import { UIObject } from "./UIObject";
+import { UISpriteObject } from "./UISpriteObject";
 
 const VELOCITY = 10;
 
@@ -17,7 +17,7 @@ export interface CallbacksOnEvent {
     cancel: ButtonCallback;
 }
 
-export class ButtonObject extends UIObject {
+export class ButtonObject extends UISpriteObject {
     texturesOnEvent: TexturesOnEvent
     callbacksOnEvent: CallbacksOnEvent;
     id: string;

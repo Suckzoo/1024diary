@@ -70,6 +70,9 @@ export class PIXIApp {
     launchGallery() {
         this.loadScene('Gallery');
     }
+    launchMainScene() {
+        this.loadScene('Main');
+    }
     run() {
         this.app.ticker.add((delta: number) => {
             this.elapsed += delta;

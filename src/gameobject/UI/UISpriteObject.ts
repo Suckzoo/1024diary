@@ -1,9 +1,9 @@
 import * as PIXI from "pixi.js";
-import { SpriteGameObject } from "./SpriteGameObject";
+import { SpriteGameObject } from "../SpriteGameObject";
 
 const VELOCITY = 10;
 
-export class UIObject extends SpriteGameObject {
+export class UISpriteObject extends SpriteGameObject {
     sprite: PIXI.Sprite;
     id: string;
     constructor(id: string, initialX: number, initialY: number, width: number, height: number, texture: any) {

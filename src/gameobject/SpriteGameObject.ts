@@ -2,7 +2,7 @@ import * as PIXI from "pixi.js";
 import { GameObject } from "./GameObject";
 
 export type SpriteType = PIXI.Sprite | PIXI.AnimatedSprite;
-export abstract class SpriteGameObject extends GameObject{
+export abstract class SpriteGameObject extends GameObject {
     spriteURI: string;
     abstract sprite: SpriteType;
     constructor() {
