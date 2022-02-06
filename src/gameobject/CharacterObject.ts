@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import { CHARACTER_IMAGE } from "../assets";
 import { KeyDownHandler } from "../eventhandlers/KeyDownHandler";
 import { AABBCollidableObject } from "./AABBCollidableObject";
 
@@ -20,7 +21,7 @@ export class CharacterObject extends AABBCollidableObject {
     status: keyof CharacterStatus;
     constructor() {
         super();
-        const spriteImage = require("../assets/gnroza.jpg");
+        const spriteImage = CHARACTER_IMAGE;
         this.sprite = PIXI.Sprite.from(spriteImage);
         this.x = 64;
         this.y = 400;

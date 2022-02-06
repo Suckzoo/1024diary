@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import { BACKGROUND_IMAGE } from "../assets";
 import { SpriteGameObject } from "./SpriteGameObject";
 
 const VELOCITY = 10;
@@ -8,7 +9,7 @@ export class BackgroundObject extends SpriteGameObject {
     id: string;
     constructor(id: string, initialX: number, width: number, height: number) {
         super();
-        const spriteImage = require("../assets/background.jpg");
+        const spriteImage = BACKGROUND_IMAGE;
         this.sprite = PIXI.Sprite.from(spriteImage);
         this.x = initialX;
         this.y = 0;

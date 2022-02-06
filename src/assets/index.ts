@@ -1,0 +1,11 @@
+export * as BACKGROUND_IMAGE from './background.jpg';
+export * as CHARACTER_IMAGE from './gnroza.jpg';
+export * as ADMIT_IMAGE from './admit.png';
+export * as CONE_IMAGE from './cone.png';
+export * as LOGO_TEXTURE from './logo.png';
+export * as PLAY_TEXTURE from './play.png';
+export * as PLAY_HOVER_TEXTURE from './play_hover.png';
+export * as GALLERY_TEXTURE from './gallery.png';
+export * as GALLERY_HOVER_TEXTURE from './gallery_hover.png';
+export * as CCJ_TEXTURE from './ccj.png';
+export * as CCJ_HOVER_TEXTURE from './ccj_hover.png';

@@ -1,10 +1,5 @@
 import * as PIXI from "pixi.js";
-import uuid from 'uuid';
 import { GameObject } from "./GameObject";
-
-const VELOCITY = 10;
-const ITEM_SIZE = 32;
-const spriteImage = require("../assets/admit.png");
 
 export class TextObject extends GameObject {
     textObj: PIXI.Text;

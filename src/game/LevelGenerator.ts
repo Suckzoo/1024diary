@@ -1,84 +1,106 @@
 import { CharacterObject } from "../gameobject/CharacterObject";
 import { ItemObject } from "../gameobject/ItemObject";
-import { PIXIGame } from "./Game";
+import { ObstacleObject } from "../gameobject/ObstacleObject";
+import { PIXIApp } from "./App";
 import Level from './level.json';
+import { GameScene } from "./scenes/Game";
 
-function RandomlyGenerateLevel(game, character: CharacterObject): void {
+const GROUND_Y = 528;
+const OBSTACLE_HEIGHT_DEFAULT = 64;
+const OBSTACLE_HEIGHT_DOUBLE = 128;
+
+function RandomlyGenerateLevel(scene: GameScene, character: CharacterObject): void {
     const coins = [];
     setInterval(() => {
-        const coin = new ItemObject(game.scene.width, 424 - 128 * Math.random());
+        const coin = new ItemObject(scene.app.width, 424 - 128 * Math.random());
         coin.hits(character, (coin, _character) => {
-            game.updateScoreByDelta(10);
-            game.removeObject(coin);
+            scene.remove(coin);
         })
         coins.push(coin);
-        game.addObject(coin);
+        scene.add(coin);
         coins.forEach((coin, index) => {
             if (coin.isDisposable()) {
-                game.removeObject(coin);
+                scene.remove(coin);
                 coins.splice(index, 1);
             }
         })
     }, 100)
 }
 
-function ReadLevelAndGenerate(game: PIXIGame, character: CharacterObject): void {
-    const coins = [];
+function ReadLevelAndGenerate(scene: GameScene, character: CharacterObject): void {
+    const objects = [];
     let lastCoinIndex = 0;
     const interval = setInterval(() => {
         if (lastCoinIndex > Level.length - 1) {
             setTimeout(() => {
                 clearInterval(interval);
-                game.finish();
+                scene.app.finish();
             }, 5 * 1000);
         }
-        if (game.elapsed < Level[lastCoinIndex].t) {
+        if (scene.app.elapsed < Level[lastCoinIndex].t) {
             return;
         }
-        const coin = new ItemObject(game.scene.width, Level[lastCoinIndex++].y);
-        coin.hits(character, (coin, _character) => {
-            game.updateScoreByDelta(10);
-            game.removeObject(coin);
-        })
-        coins.push(coin);
-        game.addObject(coin);
-        coins.forEach((coin, index) => {
+        if (Level[lastCoinIndex].itemType === 'coin') {
+            const coin = ItemObject.spawn(scene.app.width, Level[lastCoinIndex++].y);
+            coin.hits(character, (coin, _character) => {
+                scene.remove(coin);
+            })
+            objects.push(coin);
+            scene.add(coin);
+        } else {
+            const y = Level[lastCoinIndex].y;
+            const v = Level[lastCoinIndex++].v;
+            const obstacle = ObstacleObject.spawn(scene.app.width, y, 32, (GROUND_Y - y) * 2, v);
+            obstacle.hits(character, (obstacle, _character) => {
+                scene.app.over();
+            })
+            objects.push(obstacle);
+            scene.add(obstacle);
+        }
+        objects.forEach((coin, index) => {
             if (coin.isDisposable()) {
-                game.removeObject(coin);
-                coins.splice(index, 1);
+                scene.remove(coin);
+                objects.splice(index, 1);
             }
         })
     }, 100)
 }
 
-type ItemType = 'coin' | 'memorial';
+type ObjectType = 'obstacle' | 'item';
 interface Trace {
     t: number;
     y: number;
-    itemType: ItemType;
+    v: number;
+    itemType: ObjectType;
 }
-function RecordLevel(game: PIXIGame, character: CharacterObject) {
-    const coinTraces: Trace[] = [];
+function RecordLevel(scene: GameScene, _character: CharacterObject) {
+    const obstacleTraces: Trace[] = [];
 
-    const recordEnds = new Date().getTime() + 1000 * 60 * 1;
+    const recordEnds = new Date().getTime() + 1000 * 60 * 2;
     const interval = setInterval(() => {
         const now = new Date().getTime();
-        game.remainingTimeText.text = `Remaining Record Time: ${(recordEnds - now) / 1000.0}s`;
         if (now > recordEnds) {
             clearInterval(interval);
-            console.log(JSON.stringify(coinTraces, null, 4));
+            console.log(JSON.stringify(obstacleTraces, null, 4));
             alert('Record done!');
         }
-        if (game.elapsed < 2.0) return;
-        coinTraces.push({
-            t: game.elapsed,
-            y: character.y + character.height / 2,
-            itemType: 'coin'
-        });
+        if (scene.app.elapsed < 2.0) return;
+        if (Math.random() < 0.1) {
+            let h = OBSTACLE_HEIGHT_DEFAULT / 2;
+            if (Math.random() < 0.3) {
+                h = OBSTACLE_HEIGHT_DOUBLE / 2;
+            }
+            obstacleTraces.push({
+                t: scene.app.elapsed,
+                y: GROUND_Y - h,
+                v: 10 + 10 * Math.random(),
+                itemType: 'obstacle'
+            });
+        }
     }, 100);
 }
 
-export function LevelGenerator(game: PIXIGame, character: CharacterObject): void {
+export function LevelGenerator(game: GameScene, character: CharacterObject): void {
     if (game.mode === 'Record') {
         RecordLevel(game, character);
     } else if(game.mode === 'Play') {

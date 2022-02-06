@@ -1,10 +1,11 @@
 import * as PIXI from "pixi.js";
 import uuid from 'uuid';
+import { ADMIT_IMAGE } from "../assets";
 import { AABBCollidableObject } from "./AABBCollidableObject";
 
 const VELOCITY = 10;
 const ITEM_SIZE = 32;
-const spriteImage = require("../assets/admit.png");
+const spriteImage = ADMIT_IMAGE;
 
 export class ItemObject extends AABBCollidableObject {
     sprite: PIXI.Sprite;

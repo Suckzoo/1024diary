@@ -1,1 +1,1 @@
-export { GameInstance } from './game';
+export { GameInstance } from './App';
