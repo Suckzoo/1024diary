@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "publish": "git branch -D gh-pages && git switch -c gh-pages && parcel build src/index.html --dist-dir ./ && rm -rf src && git add . && git commit -m \"Update github pages\" && git push -f origin gh-pages && git switch main"
+    "publish": "git branch -D gh-pages && git switch -c gh-pages && parcel build src/index.html --dist-dir ./ --public-url https://suckzoo.github.io/huvafen/ && rm -rf src && git add . && git commit -m \"Update github pages\" && git push -f origin gh-pages && git switch main"
   },
   "repository": {
     "type": "git",
