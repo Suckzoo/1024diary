@@ -9,16 +9,21 @@ type Mode = "open" | "secret";
 
 function openPopup(scene: GalleryScene, i: number, j: number) {
     //@TODO: load proper image at i,j
-    const popup = new PopupWithDescriptionObject("gallery-popup", 0, 0, 'wow', "wow.", () => {
+    if (scene.popupOpened) return;
+    scene.popupOpened = true;
+    const popup = new PopupWithDescriptionObject("gallery-popup", 0, 0, 'wow', "와우! 예아!", () => {
         scene.removeById("gallery-popup");
+        scene.popupOpened = false;
     })
     scene.add(popup);
 }
 export class GalleryScene extends AbstractScene {
     _mode: Mode;
+    popupOpened: boolean;
     constructor(app: PIXIApp) {
         super(app);
         this._mode = "open";
+        this.popupOpened = false;
     }
     get mode() {
         return this._mode;

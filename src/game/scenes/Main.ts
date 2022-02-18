@@ -49,7 +49,7 @@ export class MainScene extends AbstractScene {
             onHover: GameInstance().resources['gallery_hover'].texture,
             onDown: GameInstance().resources['gallery_hover'].texture,
         }
-        const galleryButton = new ButtonObject('playButton', 325, 385, 150, 75, galleryButtonTextures, {
+        const galleryButton = new ButtonObject('galleryButton', 325, 385, 150, 75, galleryButtonTextures, {
             onUp: launchGallery,
             cancel: setTexture,
             onHover: setTexture,
@@ -62,7 +62,7 @@ export class MainScene extends AbstractScene {
             onHover: GameInstance().resources['ccj_hover'].texture,
             onDown: GameInstance().resources['ccj_hover'].texture,
         }
-        const ccjButton = new ButtonObject('playButton', 325, 470, 150, 75, ccjButtonTextures, {
+        const ccjButton = new ButtonObject('ccjButton', 325, 470, 150, 75, ccjButtonTextures, {
             onUp: toBeImplemented,
             cancel: setTexture,
             onHover: setTexture,

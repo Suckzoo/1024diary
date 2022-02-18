@@ -32,6 +32,14 @@ export abstract class AbstractScene {
         this.container.removeChild(obj.PIXIObject);
         this.objects.delete(id);
     }
+    onResize(
+        prevWidth: number,
+        prevHeight: number
+    ): void {
+        this.objects.forEach((obj: GameObject) => {
+            obj.onScreenResize(prevWidth, prevHeight);
+        })
+    }
     destroy(): void {
         this.container.destroy();
     }

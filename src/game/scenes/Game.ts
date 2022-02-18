@@ -13,9 +13,9 @@ export class GameScene extends AbstractScene {
         this.mode = 'Play';
     }
     load(): void {
-        const background1 = new BackgroundObject('background1', 0, this.app.width, this.app.height);
+        const background1 = new BackgroundObject('background1', 0, 800, 600);
         this.add(background1);
-        const background2 = new BackgroundObject('background2', this.app.width, this.app.width, this.app.height);
+        const background2 = new BackgroundObject('background2', 800, 800, 600);
         this.add(background2);
 
         // Character Object
@@ -28,7 +28,7 @@ export class GameScene extends AbstractScene {
             onHover: GameInstance().resources['back'].texture,
             onDown: GameInstance().resources['back'].texture,
         }
-        const jumpButton = new ButtonObject('jumpbutton', this.app.width - 200, this.app.height - 100, 200, 100, jumpButtonTextures, {
+        const jumpButton = new ButtonObject('jumpbutton', 600, 500, 200, 100, jumpButtonTextures, {
             onUp: () => {},
             onDown: () => {
                 character.jump();

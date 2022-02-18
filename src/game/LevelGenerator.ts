@@ -12,7 +12,7 @@ const OBSTACLE_HEIGHT_DOUBLE = 128;
 function RandomlyGenerateLevel(scene: GameScene, character: CharacterObject): void {
     const coins = [];
     setInterval(() => {
-        const coin = new ItemObject(scene.app.width, 424 - 128 * Math.random());
+        const coin = new ItemObject(800, 424 - 128 * Math.random());
         coin.hits(character, (coin, _character) => {
             scene.remove(coin);
         })
@@ -41,7 +41,7 @@ function ReadLevelAndGenerate(scene: GameScene, character: CharacterObject): voi
             return;
         }
         if (Level[lastCoinIndex].itemType === 'coin') {
-            const coin = ItemObject.spawn(scene.app.width, Level[lastCoinIndex++].y);
+            const coin = ItemObject.spawn(800, Level[lastCoinIndex++].y);
             coin.hits(character, (coin, _character) => {
                 scene.remove(coin);
             })
@@ -50,7 +50,7 @@ function ReadLevelAndGenerate(scene: GameScene, character: CharacterObject): voi
         } else {
             const y = Level[lastCoinIndex].y;
             const v = Level[lastCoinIndex++].v;
-            const obstacle = ObstacleObject.spawn(scene.app.width, y, 32, (GROUND_Y - y) * 2, v);
+            const obstacle = ObstacleObject.spawn(800, y, 32, (GROUND_Y - y) * 2, v);
             obstacle.hits(character, (obstacle, _character) => {
                 scene.app.over();
             })

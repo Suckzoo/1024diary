@@ -1,16 +1,20 @@
 import * as PIXI from "pixi.js";
+import { GameInstance } from "../game";
 import { GameObject } from "./GameObject";
 
 export class TextObject extends GameObject {
     textObj: PIXI.Text;
     style: PIXI.TextStyle;
     id: string;
-    constructor(x: number, y: number, id: string, text: string, style?: PIXI.TextStyle) {
+    constructor(x: number, y: number, id: string, text: string) {
         super();
-        this.textObj = new PIXI.Text(text);
-        this.textObj.x = x;
-        this.textObj.y = y;
-        this.style = style;
+        this.style = new PIXI.TextStyle({
+            fontFamily: "neodgm"
+        });
+        this.textObj = new PIXI.Text(text, this.style);
+        this.textObj.roundPixels = true;
+        this.x = x;
+        this.y = y;
         this.id = id;
     }
     stringify(): string {
@@ -27,15 +31,19 @@ export class TextObject extends GameObject {
         this.textObj.text = t;
     }
     get x() {
-        return this.textObj.x;
+        return this.textObj.x / GameInstance().width * 800;
     }
     set x(x: number) {
-        this.textObj.x = x;
+        this.textObj.x = x / 800 * GameInstance().width;
     }
     get y() {
-        return this.textObj.y;
+        return this.textObj.y / GameInstance().height * 600;
     }
     set y(y: number) {
-        this.textObj.y = y;
+        this.textObj.y = y / 600 * GameInstance().height;
+    }
+    onScreenResize(prevWidth: number, prevHeight: number): void {
+        this.x = this.x / prevWidth * GameInstance().width;
+        this.y = this.y / prevHeight * GameInstance().height;
     }
 }

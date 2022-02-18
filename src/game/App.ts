@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import PIXISound from '@pixi/sound';
+import FontFaceObserver from 'fontfaceobserver';
 import { AbstractScene } from "./scenes/Scene";
 import { MainScene } from "./scenes/Main";
 import { GameScene } from "./scenes/Game";
@@ -26,11 +26,11 @@ export class PIXIApp {
     resources: PIXI.utils.Dict<PIXI.LoaderResource>;
 
     constructor({
-        documentBody,
+        container,
         width,
         height
     }: {
-        documentBody: HTMLElement,
+        container: HTMLElement,
         width: number,
         height: number
     }) {
@@ -40,13 +40,17 @@ export class PIXIApp {
         // this.mode = 'Record';
         this.width = width;
         this.height = height;
-        this.app = new PIXI.Application({width, height});
-        documentBody.appendChild(this.app.view);
+        this.app = new PIXI.Application({
+            resizeTo: container
+        });
+        container.appendChild(this.app.view);
         this.elapsed = 0.0;
     }
-    async callSpriteLoader() {
+    async callAssetsLoader() {
         const { Loader, Resources } = await LoadSprites(this.app.loader)
         this.resources = Resources;
+        const font = new FontFaceObserver('neodgm');
+        await font.load();
     }
     loadScene(mode: Mode) {
         this.unloadCurrentScene();
@@ -97,15 +101,25 @@ export class PIXIApp {
         alert('Game over!');
         this.loadScene('Main');
     }
+    applyScreenResize(currWidth: number, currHeight: number) {
+        const prevWidth = this.width;
+        const prevHeight = this.height;
+        this.width = currWidth;
+        this.height = currHeight;
+        this.app.resize();
+        if (this.currentScene) {
+            this.currentScene.onResize(prevWidth, prevHeight);
+        }
+    }
 }
-export function GameInstance(documentBody?: HTMLElement, width?: number, height?: number) {
+export function GameInstance(container?: HTMLElement, width?: number, height?: number) {
     if (!Game) {
         Game = new PIXIApp({
-            documentBody,
+            container,
             width,
             height,
         });
-        Game.callSpriteLoader()
+        Game.callAssetsLoader()
             .then(() => {
                 Game.loadScene('Main');
             });

@@ -6,4 +6,5 @@ export abstract class GameObject {
     abstract stringify();
     abstract update(delta: number, elapsed: number): void;
     abstract get PIXIObject();
+    abstract onScreenResize(prevWidth: number, prevHeight: number): void;
 }

@@ -15,15 +15,21 @@ const INITIAL_VELOCITY = 12.5;
 const GRAVITY = 0.5;
 
 export class CharacterObject extends AABBCollidableObject {
-    sprite: PIXI.Sprite
+    sprite: PIXI.AnimatedSprite
     refTime: number;
     secondJumpRefY: number;
     elapsed: number;
     status: keyof CharacterStatus;
     constructor() {
         super();
-        const spriteImage = GameInstance().resources['character'].texture;
-        this.sprite = new PIXI.Sprite(spriteImage);
+        this.sprite = new PIXI.AnimatedSprite([
+            GameInstance().resources['character1'].texture,
+            GameInstance().resources['character2'].texture,
+            GameInstance().resources['character3'].texture,
+            GameInstance().resources['character4'].texture,
+        ]);
+        this.sprite.animationSpeed = 0.1;
+        this.sprite.play();
         this.x = 64;
         this.y = 400;
         this.width = 64;
@@ -38,6 +44,7 @@ export class CharacterObject extends AABBCollidableObject {
     }
     jump(): void {
         if (this.status !== 'secondJump') {
+            this.sprite.stop();
             sound.play('sword_sound');
         }
         if (this.status === 'onGround') {
@@ -59,6 +66,7 @@ export class CharacterObject extends AABBCollidableObject {
             this.y = this.secondJumpRefY - (INITIAL_VELOCITY * dt - 0.5 * GRAVITY * dt * dt);
         }
         if (this.y >= GROUND_Y) {
+            this.sprite.play();
             this.status = 'onGround';
             this.y = GROUND_Y;
         }

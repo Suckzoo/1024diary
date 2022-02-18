@@ -18,6 +18,10 @@ import * as SECRETPHOTO_TEXTURE from './secretphoto.png';
 import * as WOW_PICTURE from './wow.png';
 import * as LOCK_PICTURE from './lock.png';
 import * as X_TEXTURE from './x.png';
+import * as CHAR_SUCKZOO_1 from './char-suckzoo-1.png';
+import * as CHAR_SUCKZOO_2 from './char-suckzoo-2.png';
+import * as CHAR_SUCKZOO_3 from './char-suckzoo-3.png';
+import * as CHAR_SUCKZOO_4 from './char-suckzoo-4.png';
 import * as SWORD_SOUND from './sword.mp3';
 
 interface LoaderAndResources {
@@ -27,7 +31,10 @@ interface LoaderAndResources {
 export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
     loader
         .add('background', BACKGROUND_IMAGE)
-        .add('character', CHARACTER_IMAGE)
+        .add('character1', CHAR_SUCKZOO_1)
+        .add('character2', CHAR_SUCKZOO_2)
+        .add('character3', CHAR_SUCKZOO_3)
+        .add('character4', CHAR_SUCKZOO_4)
         .add('admit', ADMIT_IMAGE)
         .add('cone', CONE_IMAGE)
         .add('logo', LOGO_TEXTURE)

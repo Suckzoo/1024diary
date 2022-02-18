@@ -21,7 +21,7 @@ export class PopupWithDescriptionObject extends ContainerGameObject {
         this.container = new PIXI.Container();
         var graphics = new PIXI.Graphics();
         graphics.beginFill(0xFFFFFF);
-        graphics.drawRect(0, 0, WIDTH, HEIGHT);
+        graphics.drawRect(0, 0, WIDTH / 800 * GameInstance().width, HEIGHT / 600 * GameInstance().height);
         this.container.addChild(graphics);
         const pictureObj = new UISpriteObject(`${id}#pics`, 100, 100, 600, 400, GameInstance().resources[picture].texture);
         

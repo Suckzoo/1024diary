@@ -30,6 +30,7 @@
     "@pixi/loaders": "^6.2.1",
     "@pixi/sound": "^4.2.0",
     "@swc/helpers": "^0.2.14",
+    "fontfaceobserver": "^2.1.0",
     "pixi.js": "^6.2.1",
     "uuid": "^3.4.0"
   }
