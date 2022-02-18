@@ -32,8 +32,8 @@ export class CharacterObject extends AABBCollidableObject {
         this.sprite.play();
         this.x = 64;
         this.y = 400;
-        this.width = 64;
-        this.height = 128;
+        this.width = 86;
+        this.height = 129;
         this.rotation = 0;
         this.refTime = 0;
         this.status = 'onGround';
