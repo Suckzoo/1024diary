@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
+import { sound } from "@pixi/sound";
 import { GameInstance } from "..";
-import { CCJ_HOVER_TEXTURE, CCJ_TEXTURE, GALLERY_HOVER_TEXTURE, GALLERY_TEXTURE, LOGO_TEXTURE, PLAY_HOVER_TEXTURE, PLAY_TEXTURE } from "../../assets";
 import { ButtonObject, CallbacksOnEvent, TexturesOnEvent } from "../../gameobject/UI/ButtonObject";
 import { UISpriteObject } from "../../gameobject/UI/UISpriteObject";
 import { PIXIApp } from "../App";
@@ -10,10 +10,12 @@ function setTexture(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event:
     btn.texture = btn.texturesOnEvent[eventType];
 }
 function playGame(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
+    sound.play('sword_sound');
     btn.texture = btn.texturesOnEvent[eventType];
     GameInstance().play();
 }
 function launchGallery(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
+    sound.play('sword_sound');
     btn.texture = btn.texturesOnEvent[eventType];
     GameInstance().launchGallery();
 }
@@ -26,13 +28,13 @@ export class MainScene extends AbstractScene {
         super(app);
     }
     load(): void {
-        const logo = new UISpriteObject('logo', 150, 100, 500, 150, PIXI.Texture.from(LOGO_TEXTURE));
+        const logo = new UISpriteObject('logo', 150, 100, 500, 150, GameInstance().resources['logo'].texture);
         this.add(logo);
         const playButtonTextures: TexturesOnEvent = {
-            onUp: PIXI.Texture.from(PLAY_TEXTURE),
-            cancel: PIXI.Texture.from(PLAY_TEXTURE),
-            onHover: PIXI.Texture.from(PLAY_HOVER_TEXTURE),
-            onDown: PIXI.Texture.from(PLAY_HOVER_TEXTURE)
+            onUp: GameInstance().resources['play'].texture,
+            cancel: GameInstance().resources['play'].texture,
+            onHover: GameInstance().resources['play_hover'].texture,
+            onDown: GameInstance().resources['play_hover'].texture
         }
         const playButton = new ButtonObject('playButton', 325, 300, 150, 75, playButtonTextures, {
             onUp: playGame,
@@ -42,10 +44,10 @@ export class MainScene extends AbstractScene {
         });
         this.add(playButton);
         const galleryButtonTextures: TexturesOnEvent = {
-            onUp: PIXI.Texture.from(GALLERY_TEXTURE),
-            cancel: PIXI.Texture.from(GALLERY_TEXTURE),
-            onHover: PIXI.Texture.from(GALLERY_HOVER_TEXTURE),
-            onDown: PIXI.Texture.from(GALLERY_HOVER_TEXTURE)
+            onUp: GameInstance().resources['gallery'].texture,
+            cancel: GameInstance().resources['gallery'].texture,
+            onHover: GameInstance().resources['gallery_hover'].texture,
+            onDown: GameInstance().resources['gallery_hover'].texture,
         }
         const galleryButton = new ButtonObject('playButton', 325, 385, 150, 75, galleryButtonTextures, {
             onUp: launchGallery,
@@ -55,10 +57,10 @@ export class MainScene extends AbstractScene {
         });
         this.add(galleryButton);
         const ccjButtonTextures: TexturesOnEvent = {
-            onUp: PIXI.Texture.from(CCJ_TEXTURE),
-            cancel: PIXI.Texture.from(CCJ_TEXTURE),
-            onHover: PIXI.Texture.from(CCJ_HOVER_TEXTURE),
-            onDown: PIXI.Texture.from(CCJ_HOVER_TEXTURE)
+            onUp: GameInstance().resources['ccj'].texture,
+            cancel: GameInstance().resources['ccj'].texture,
+            onHover: GameInstance().resources['ccj_hover'].texture,
+            onDown: GameInstance().resources['ccj_hover'].texture,
         }
         const ccjButton = new ButtonObject('playButton', 325, 470, 150, 75, ccjButtonTextures, {
             onUp: toBeImplemented,

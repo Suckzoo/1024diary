@@ -1,9 +1,7 @@
 import * as PIXI from "pixi.js";
 import uuid from 'uuid';
-import { CONE_IMAGE } from "../assets";
+import { GameInstance } from "../game";
 import { AABBCollidableObject } from "./AABBCollidableObject";
-
-const spriteImage = CONE_IMAGE;
 
 export class ObstacleObject extends AABBCollidableObject {
     sprite: PIXI.Sprite;
@@ -11,14 +9,14 @@ export class ObstacleObject extends AABBCollidableObject {
     velocity: number;
     constructor(initialX: number, initialY: number, width: number, height: number, velocity: number) {
         super();
-        this.sprite = PIXI.Sprite.from(spriteImage);
+        const sprite = GameInstance().resources['cone'].texture
+        this.sprite = new PIXI.Sprite(sprite);
         this.x = initialX;
         this.y = initialY;
         this.width = width;
         this.height = height;
         this.velocity = velocity;
         this.rotation = 0;
-        this.spriteURI = spriteImage;
         this.id = uuid.v4();
     }
     static spawn(initialX: number, initialY: number, width: number, height: number, velocity: number) {

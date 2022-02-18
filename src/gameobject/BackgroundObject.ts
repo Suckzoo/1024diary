@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import { BACKGROUND_IMAGE } from "../assets";
+import { GameInstance } from "../game";
 import { SpriteGameObject } from "./SpriteGameObject";
 
 const VELOCITY = 10;
@@ -9,14 +9,13 @@ export class BackgroundObject extends SpriteGameObject {
     id: string;
     constructor(id: string, initialX: number, width: number, height: number) {
         super();
-        const spriteImage = BACKGROUND_IMAGE;
-        this.sprite = PIXI.Sprite.from(spriteImage);
+        const spriteImage = GameInstance().resources['background'].texture;
+        this.sprite = new PIXI.Sprite(spriteImage);
         this.x = initialX;
         this.y = 0;
         this.width = width;
         this.height = height;
         this.rotation = 0;
-        this.spriteURI = spriteImage
         this.id = id;
     }
     stringify(): string {

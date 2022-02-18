@@ -2,7 +2,6 @@ import * as PIXI from "pixi.js";
 import { GameObject } from "./GameObject";
 
 export abstract class ContainerGameObject extends GameObject {
-    spriteURI: string;
     abstract container: PIXI.Container;
     constructor() {
         super();

@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
-import { CHARACTER_IMAGE } from "../assets";
+import { sound } from '@pixi/sound';
 import { KeyDownHandler } from "../eventhandlers/KeyDownHandler";
+import { GameInstance } from "../game";
 import { AABBCollidableObject } from "./AABBCollidableObject";
 
 type CharacterStatus = {
@@ -21,20 +22,32 @@ export class CharacterObject extends AABBCollidableObject {
     status: keyof CharacterStatus;
     constructor() {
         super();
-        const spriteImage = CHARACTER_IMAGE;
-        this.sprite = PIXI.Sprite.from(spriteImage);
+        const spriteImage = GameInstance().resources['character'].texture;
+        this.sprite = new PIXI.Sprite(spriteImage);
         this.x = 64;
         this.y = 400;
         this.width = 64;
         this.height = 128;
         this.rotation = 0;
-        this.spriteURI = spriteImage;
         this.refTime = 0;
         this.status = 'onGround';
         this.registerEventHandlers();
     }
     stringify(): string {
         return 'character';
+    }
+    jump(): void {
+        if (this.status !== 'secondJump') {
+            sound.play('sword_sound');
+        }
+        if (this.status === 'onGround') {
+            this.refTime = this.elapsed;
+            this.status = 'jumping';
+        } else if (this.status === 'jumping') {
+            this.status = 'secondJump';
+            this.secondJumpRefY = this.y;
+            this.refTime = this.elapsed;
+        }
     }
     update(_delta: number, elapsed: number): void {
         this.elapsed = elapsed;
@@ -52,15 +65,7 @@ export class CharacterObject extends AABBCollidableObject {
     }
     registerEventHandlers(): void {
         KeyDownHandler.add(' ', () => {
-            console.log('hihi');
-            if (this.status === 'onGround') {
-                this.refTime = this.elapsed;
-                this.status = 'jumping';
-            } else if (this.status === 'jumping') {
-                this.status = 'secondJump';
-                this.secondJumpRefY = this.y;
-                this.refTime = this.elapsed;
-            }
-        })
+            this.jump()
+        });
     }
 }

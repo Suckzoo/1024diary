@@ -1,8 +1,10 @@
 import * as PIXI from "pixi.js";
+import PIXISound from '@pixi/sound';
 import { AbstractScene } from "./scenes/Scene";
 import { MainScene } from "./scenes/Main";
 import { GameScene } from "./scenes/Game";
 import { GalleryScene } from "./scenes/Gallery";
+import { LoadSprites } from "../assets";
 
 let Game: PIXIApp | null = null;
 
@@ -21,6 +23,7 @@ export class PIXIApp {
     width: number;
     height: number;
     elapsed: number;
+    resources: PIXI.utils.Dict<PIXI.LoaderResource>;
 
     constructor({
         documentBody,
@@ -40,6 +43,10 @@ export class PIXIApp {
         this.app = new PIXI.Application({width, height});
         documentBody.appendChild(this.app.view);
         this.elapsed = 0.0;
+    }
+    async callSpriteLoader() {
+        const { Loader, Resources } = await LoadSprites(this.app.loader)
+        this.resources = Resources;
     }
     loadScene(mode: Mode) {
         this.unloadCurrentScene();
@@ -79,7 +86,6 @@ export class PIXIApp {
             if (this.currentScene) {
                 this.currentScene.update(delta, this.elapsed);
             }
-            
         });
     }
     resetElapsed() {
@@ -99,7 +105,10 @@ export function GameInstance(documentBody?: HTMLElement, width?: number, height?
             width,
             height,
         });
-        Game.loadScene('Main');
+        Game.callSpriteLoader()
+            .then(() => {
+                Game.loadScene('Main');
+            });
     }
     return Game;
 }
