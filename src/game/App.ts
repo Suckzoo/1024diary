@@ -24,6 +24,9 @@ export class PIXIApp {
     height: number;
     elapsed: number;
     resources: PIXI.utils.Dict<PIXI.LoaderResource>;
+    ItemTextures: {
+        [key: string]: PIXI.Texture<PIXI.Resource>[];
+    }
 
     constructor({
         container,
@@ -44,11 +47,22 @@ export class PIXIApp {
             resizeTo: container
         });
         container.appendChild(this.app.view);
+        this.ItemTextures = {};
         this.elapsed = 0.0;
     }
     async callAssetsLoader() {
         const { Loader, Resources } = await LoadSprites(this.app.loader)
         this.resources = Resources;
+        Object.keys(GameInstance().resources).forEach(key => {
+            if (key.endsWith('-glow')) {
+                if (GameInstance().resources[key.split('-glow')[0]]) {
+                    this.ItemTextures[key.split('-glow')[0]] = [
+                        GameInstance().resources[key.split('-glow')[0]].texture,
+                        GameInstance().resources[key].texture
+                    ];
+                }
+            }
+        })
         const font = new FontFaceObserver('neodgm');
         await font.load();
     }
@@ -83,6 +97,12 @@ export class PIXIApp {
     }
     launchMainScene() {
         this.loadScene('Main');
+    }
+    stopTimer() {
+        this.app.ticker.stop();
+    }
+    resumeTimer() {
+        this.app.ticker.start();
     }
     run() {
         this.app.ticker.add((delta: number) => {

@@ -2,7 +2,7 @@ import * as PIXI from "pixi.js";
 import { GameInstance } from "../game";
 import { SpriteGameObject } from "./SpriteGameObject";
 
-const VELOCITY = 10;
+const VELOCITY = 6;
 
 export class BackgroundObject extends SpriteGameObject {
     sprite: PIXI.Sprite;

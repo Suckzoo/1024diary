@@ -6,11 +6,9 @@ export class TextObject extends GameObject {
     textObj: PIXI.Text;
     style: PIXI.TextStyle;
     id: string;
-    constructor(x: number, y: number, id: string, text: string) {
+    constructor(x: number, y: number, id: string, text: string, style: PIXI.TextStyle) {
         super();
-        this.style = new PIXI.TextStyle({
-            fontFamily: "neodgm"
-        });
+        this.style = style
         this.textObj = new PIXI.Text(text, this.style);
         this.textObj.roundPixels = true;
         this.x = x;
@@ -41,6 +39,9 @@ export class TextObject extends GameObject {
     }
     set y(y: number) {
         this.textObj.y = y / 600 * GameInstance().height;
+    }
+    get width() {
+        return this.textObj.width;
     }
     onScreenResize(prevWidth: number, prevHeight: number): void {
         this.x = this.x / prevWidth * GameInstance().width;

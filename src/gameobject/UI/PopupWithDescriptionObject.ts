@@ -5,7 +5,6 @@ import { TextObject } from "../TextObject";
 import { ButtonObject, TexturesOnEvent } from "./ButtonObject";
 import { UISpriteObject } from "./UISpriteObject";
 
-const VELOCITY = 10;
 const WIDTH = 800;
 const HEIGHT = 600;
 
@@ -39,7 +38,10 @@ export class PopupWithDescriptionObject extends ContainerGameObject {
             onHover: () => {}
         });
         this.container.addChild(closeButton.PIXIObject);
-        const descriptionObj = new TextObject(100, 550, `${id}#description`, description);
+        const descriptionObj = new TextObject(100, 550, `${id}#description`, description, new PIXI.TextStyle({
+            fontFamily: 'neodgm',
+            fontSize: 20
+        }));
         this.container.addChild(descriptionObj.PIXIObject);
         this.x = initialX;
         this.y = initialY;

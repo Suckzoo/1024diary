@@ -2,7 +2,6 @@ import * as PIXI from 'pixi.js';
 import * as PIXISound from '@pixi/sound';
 
 import * as BACKGROUND_IMAGE from './background.jpg';
-import * as CHARACTER_IMAGE from './gnroza.jpg';
 import * as ADMIT_IMAGE from './admit.png';
 import * as CONE_IMAGE from './cone.png';
 import * as LOGO_TEXTURE from './logo.png';
@@ -18,10 +17,16 @@ import * as SECRETPHOTO_TEXTURE from './secretphoto.png';
 import * as WOW_PICTURE from './wow.png';
 import * as LOCK_PICTURE from './lock.png';
 import * as X_TEXTURE from './x.png';
-import * as CHAR_SUCKZOO_1 from './char-suckzoo-1.png';
-import * as CHAR_SUCKZOO_2 from './char-suckzoo-2.png';
-import * as CHAR_SUCKZOO_3 from './char-suckzoo-3.png';
-import * as CHAR_SUCKZOO_4 from './char-suckzoo-4.png';
+import * as CHAR_SUCKZOO_1 from './char-1.png';
+import * as CHAR_SUCKZOO_2 from './char-2.png';
+import * as CHAR_SUCKZOO_3 from './char-3.png';
+import * as CHAR_SUCKZOO_4 from './char-4.png';
+import * as ITEM_MACBOOK from './item-macbook-1.png';
+import * as ITEM_MACBOOK_GLOW from './item-macbook-2.png';
+import * as ITEM_LINGO from './item-lingo-1.png';
+import * as ITEM_LINGO_GLOW from './item-lingo-2.png';
+import * as ITEM_RING from './item-propose-1.png';
+import * as ITEM_RING_GLOW from './item-propose-2.png';
 import * as SWORD_SOUND from './sword.mp3';
 
 interface LoaderAndResources {
@@ -50,6 +55,12 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('wow', WOW_PICTURE)
         .add('lock', LOCK_PICTURE)
         .add('x', X_TEXTURE)
+        .add('macbook', ITEM_MACBOOK)
+        .add('macbook-glow', ITEM_MACBOOK_GLOW)
+        .add('lingo', ITEM_LINGO)
+        .add('lingo-glow', ITEM_LINGO_GLOW)
+        .add('ring', ITEM_RING)
+        .add('ring-glow', ITEM_RING_GLOW)
         .add('sword_sound', SWORD_SOUND)
     return new Promise<LoaderAndResources>(resolve => {
         loader.load((loader, resources) => {
