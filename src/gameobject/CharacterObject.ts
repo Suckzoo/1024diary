@@ -7,7 +7,8 @@ import { AABBCollidableObject } from "./AABBCollidableObject";
 type CharacterStatus = {
     onGround: boolean,
     jumping: boolean,
-    secondJump: boolean
+    secondJump: boolean,
+    frozen: boolean
 }
 
 const GROUND_Y = 371;
@@ -17,6 +18,9 @@ const GRAVITY = 0.5;
 export class CharacterObject extends AABBCollidableObject {
     sprite: PIXI.AnimatedSprite
     refTime: number;
+    frozenTime: number;
+    frozenRef: number;
+    frozenStatus: keyof CharacterStatus;
     secondJumpRefY: number;
     elapsed: number;
     status: keyof CharacterStatus;
@@ -36,6 +40,9 @@ export class CharacterObject extends AABBCollidableObject {
         this.height = 129;
         this.rotation = 0;
         this.refTime = 0;
+        this.frozenTime = 0;
+        this.frozenRef = 0;
+        this.frozenStatus = 'frozen';
         this.status = 'onGround';
         this.registerEventHandlers();
     }
@@ -56,9 +63,22 @@ export class CharacterObject extends AABBCollidableObject {
             this.refTime = this.elapsed;
         }
     }
+    freeze(): void {
+        this.frozenTime = this.elapsed;
+        this.frozenRef = this.elapsed - this.refTime;
+        this.frozenStatus = this.status;
+        this.status = 'frozen';
+    }
+    unfreeze(): void {
+        this.status = this.frozenStatus;
+        this.refTime = this.elapsed - this.frozenRef;
+        this.frozenStatus = 'frozen';
+    }
     update(_delta: number, elapsed: number): void {
         this.elapsed = elapsed;
-        if (this.status === 'jumping') {
+        if (this.status === 'frozen') {
+            // do nothing
+        } else if (this.status === 'jumping') {
             const dt = elapsed - this.refTime;
             this.y = GROUND_Y - (INITIAL_VELOCITY * dt - 0.5 * GRAVITY * dt * dt); 
         } else if (this.status === 'secondJump') {

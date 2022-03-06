@@ -27,6 +27,7 @@ export class PIXIApp {
     ItemTextures: {
         [key: string]: PIXI.Texture<PIXI.Resource>[];
     }
+    private _paused: boolean;
 
     constructor({
         container,
@@ -49,6 +50,7 @@ export class PIXIApp {
         container.appendChild(this.app.view);
         this.ItemTextures = {};
         this.elapsed = 0.0;
+        this._paused = false;
     }
     async callAssetsLoader() {
         const { Loader, Resources } = await LoadSprites(this.app.loader)
@@ -99,14 +101,19 @@ export class PIXIApp {
         this.loadScene('Main');
     }
     stopTimer() {
-        this.app.ticker.stop();
+        this._paused = true;
     }
     resumeTimer() {
-        this.app.ticker.start();
+        this._paused = false;
+    }
+    get paused() {
+        return this._paused;
     }
     run() {
         this.app.ticker.add((delta: number) => {
-            this.elapsed += delta;
+            if (!this.paused) {
+                this.elapsed += delta;
+            }
             if (this.currentScene) {
                 this.currentScene.update(delta, this.elapsed);
             }

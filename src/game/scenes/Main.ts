@@ -6,6 +6,8 @@ import { ButtonObject, CallbacksOnEvent, TexturesOnEvent } from "../../gameobjec
 import { UISpriteObject } from "../../gameobject/UI/UISpriteObject";
 import { PIXIApp } from "../App";
 import { AbstractScene } from "./Scene";
+import { PopupObject } from "../../gameobject/UI/PopupObject";
+import { TextObject } from "../../gameobject/TextObject";
 
 function setTexture(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
     btn.texture = btn.texturesOnEvent[eventType];
@@ -23,9 +25,42 @@ function launchGallery(btn: ButtonObject, eventType: keyof CallbacksOnEvent, eve
 function openInvitation(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
     location.href = 'https://suckzoo.github.io/wedding-invitation';
 }
-function toBeImplemented(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
-    btn.texture = btn.texturesOnEvent[eventType];
-    alert("TODO");
+function showLicenseInformation(scene: MainScene) {
+    const popup = new PopupObject(
+        'license',
+        (container: PopupObject) => {
+            const licenseText = new TextObject(
+                100,
+                50,
+                'licenseText',
+                `라이센스 정보
+
+* Neo둥근모
+
+Copyright © 2017-2022, Eunbin Jeong (Dalgona.) <project-neodgm@dalgona.dev>
+with reserved font name "Neo둥근모" and "NeoDunggeunmo".
+
+
+* Grotto Escape Game Art Pack
+
+Artwork created by Luis Zuno (@ansimuz)
+License (CC0) You can copy, modify, distribute and perform the work,
+even for commercial purposes, all without asking permission:
+http://creativecommons.org/publicdomain/zero/1.0/
+Get more resources at ansimuz.com, Spread the word!
+                `,
+                new PIXI.TextStyle({
+                    fontFamily: 'neodgm',
+                    fontSize: 20
+                })
+            )
+            container.add(licenseText);
+        },
+        () => {
+            scene.removeById('license');
+        }
+    ) 
+    scene.add(popup);
 }
 function shareByKakaoTalk(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
     Kakao.Link.sendDefault({
@@ -120,7 +155,9 @@ export class MainScene extends AbstractScene {
             onDown: GameInstance().resources['ccj_hover'].texture,
         }
         const licenseButton = new ButtonObject('ccjButton', 405, 470, 150, 75, licenseButtonTextures, {
-            onUp: toBeImplemented,
+            onUp: () => {
+                showLicenseInformation(this)
+            },
             cancel: setTexture,
             onHover: setTexture,
             onDown: setTexture

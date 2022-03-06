@@ -4,8 +4,20 @@ import { GameObject } from "./GameObject";
 
 export abstract class ContainerGameObject extends GameObject {
     abstract container: PIXI.Container;
+    map: Map<string, GameObject>;
     constructor() {
         super();
+        this.map = new Map<string, GameObject>();
+    }
+    add(obj: GameObject): void {
+        this.map.set(obj.stringify(), obj);
+        this.container.addChild(obj.PIXIObject)
+    }
+    removeById(id: string): void {
+        const obj = this.map.get(id);
+        if (!obj) return;
+        this.map.delete(id);
+        this.container.removeChild(obj.PIXIObject);
     }
     get PIXIObject(): PIXI.Container {
         return this.container;

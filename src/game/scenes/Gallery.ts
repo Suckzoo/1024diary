@@ -1,7 +1,9 @@
 import * as PIXI from "pixi.js";
 import { GameInstance } from "..";
+import { TextObject } from "../../gameobject/TextObject";
 import { ButtonObject, TexturesOnEvent } from "../../gameobject/UI/ButtonObject";
-import { PopupWithDescriptionObject } from "../../gameobject/UI/PopupWithDescriptionObject";
+import { PopupObject } from "../../gameobject/UI/PopupObject";
+import { UISpriteObject } from "../../gameobject/UI/UISpriteObject";
 import { PIXIApp } from "../App";
 import { AbstractScene } from "./Scene";
 
@@ -11,10 +13,22 @@ function openPopup(scene: GalleryScene, i: number, j: number) {
     //@TODO: load proper image at i,j
     if (scene.popupOpened) return;
     scene.popupOpened = true;
-    const popup = new PopupWithDescriptionObject("gallery-popup", 0, 0, 'wow', "와우! 예아!", () => {
-        scene.removeById("gallery-popup");
-        scene.popupOpened = false;
-    })
+    const popup = new PopupObject(
+        "gallery-popup",
+        (container: PopupObject) => {
+            const pictureObj = new UISpriteObject(`${container.id}#pics`, 100, 100, 600, 400, GameInstance().resources['wow'].texture);
+            container.add(pictureObj);
+            const descriptionObj = new TextObject(100, 550, `${container.id}#description`, '와우! 예아!', new PIXI.TextStyle({
+                fontFamily: 'neodgm',
+                fontSize: 20
+            }));
+            container.add(descriptionObj);
+        },
+        () => {
+            scene.removeById("gallery-popup");
+            scene.popupOpened = false;
+        }
+    )
     scene.add(popup);
 }
 export class GalleryScene extends AbstractScene {

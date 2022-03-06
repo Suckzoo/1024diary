@@ -9,14 +9,15 @@ import { AbstractScene } from "./Scene";
 export class GameScene extends AbstractScene {
     mode: 'None' | 'Record' | 'Play' | 'RandomPlay' = 'None';
     bgQueue: BackgroundObject[] = [];
+    character: CharacterObject;
     constructor(app: PIXIApp) {
         super(app);
         this.mode = 'Play';
+        this.character = new CharacterObject()
     }
     load(): void {
         // Character Object
-        const character = new CharacterObject()
-        this.add(character);
+        this.add(this.character);
 
         const jumpButtonTextures: TexturesOnEvent = {
             onUp: GameInstance().resources['back'].texture,
@@ -27,7 +28,7 @@ export class GameScene extends AbstractScene {
         const jumpButton = new ButtonObject('jumpbutton', 600, 500, 200, 100, jumpButtonTextures, {
             onUp: () => {},
             onDown: () => {
-                character.jump();
+                this.character.jump();
             },
             onHover: () => {},
             cancel: () => {}
@@ -35,13 +36,16 @@ export class GameScene extends AbstractScene {
         this.add(jumpButton);
 
         this.app.resetElapsed();
-        LevelGenerator(this, character);
+        LevelGenerator(this, this.character);
     }
     addBackgroundParticle(particle: BackgroundObject): void {
         this.bgQueue.push(particle);
         this.add(particle);
     }
     update(delta: number, elapsed: number): void {
+        if (this.app.paused) {
+            return;
+        }
         this.objects.forEach(object => {
             object.update(delta, elapsed);
         })

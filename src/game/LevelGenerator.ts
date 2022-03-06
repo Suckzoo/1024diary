@@ -7,9 +7,11 @@ import * as PIXI from 'pixi.js';
 import Level from './level.json';
 import { GameScene } from "./scenes/Game";
 import { TextCloudObject } from "../gameobject/TextCloudObject";
-import { PopupWithDescriptionObject } from "../gameobject/UI/PopupWithDescriptionObject";
+import { PopupObject } from "../gameobject/UI/PopupObject";
 import { BackgroundObject } from "../gameobject/BackgroundObject";
 import { v4 as uuidv4 } from 'uuid';
+import { UISpriteObject } from "../gameobject/UI/UISpriteObject";
+import { TextObject } from "../gameobject/TextObject";
 
 const GROUND_Y = 499;
 const OBSTACLE_HEIGHT_DEFAULT = 64;
@@ -45,6 +47,9 @@ function ReadLevelAndGenerate(scene: GameScene, character: CharacterObject): voi
     let lastRepeat = 0;
     let gameFinished = false;
     const interval = setInterval(() => {
+        if (scene.app.paused) {
+            return;
+        }
         const bgSeq = Level.backgroundSequence;
         if (lastBgIndex === bgSeq.length) {
             if (!gameFinished) {
@@ -77,8 +82,6 @@ function ReadLevelAndGenerate(scene: GameScene, character: CharacterObject): voi
         let widthSum = scene.bgQueue.reduce((sum, bg) => sum + bg.width, 0);
         while (scene.bgQueue[0].x + widthSum < 850) {
             const shiftX = 850 - (scene.bgQueue[0].x + widthSum);
-            console.log(lastBgIndex);
-            console.log(bgSeq[lastBgIndex].bgKey);
             const bgParticle = new BackgroundObject(
                 `bg-${bgSeq[lastBgIndex].bgKey}-${uuidv4()}`,
                 bgSeq[lastBgIndex].bgKey,
@@ -106,12 +109,17 @@ function ReadLevelAndGenerate(scene: GameScene, character: CharacterObject): voi
                     localStorage.setItem(`secret${gallX}${gallY}`, 'true');
                     scene.remove(coin);
                     sound.play('pickup_sound')
-                    const popup = new PopupWithDescriptionObject(
+                    const popup = new PopupObject(
                         `preview-secret${gallX}${gallY}`,
-                        0,
-                        0,
-                        'wow',
-                        '우리 만나볼래요?',
+                        (container: PopupObject) => {
+                            const pictureObj = new UISpriteObject(`${container.id}#pics`, 100, 100, 600, 400, GameInstance().resources['wow'].texture);
+                            container.add(pictureObj);
+                            const descriptionObj = new TextObject(100, 550, `${container.id}#description`, '와우! 예아!', new PIXI.TextStyle({
+                                fontFamily: 'neodgm',
+                                fontSize: 20
+                            }));
+                            container.add(descriptionObj);
+                        },
                         () => {
                             scene.removeById(`preview-secret${gallX}${gallY}`);
                             scene.app.resumeTimer();
