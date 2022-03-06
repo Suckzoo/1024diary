@@ -32,6 +32,7 @@ export class CharacterObject extends AABBCollidableObject {
             GameInstance().resources['character3'].texture,
             GameInstance().resources['character4'].texture,
         ]);
+        this.sprite.zIndex = 999;
         this.sprite.animationSpeed = 0.1;
         this.sprite.play();
         this.x = 64;

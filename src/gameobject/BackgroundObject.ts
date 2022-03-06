@@ -2,7 +2,7 @@ import * as PIXI from "pixi.js";
 import { GameInstance } from "../game";
 import { SpriteGameObject } from "./SpriteGameObject";
 
-const VELOCITY = 6;
+export const BACKGROUND_VELOCITY = 6;
 
 export class BackgroundObject extends SpriteGameObject {
     sprite: PIXI.Sprite;
@@ -23,7 +23,7 @@ export class BackgroundObject extends SpriteGameObject {
         return this.id;
     }
     update(delta: number, _elapsed: number): void {
-        this.x = this.x - VELOCITY * delta;
+        this.x = this.x - BACKGROUND_VELOCITY * delta;
     }
     isDisposable() {
         return this.x < -this.width;

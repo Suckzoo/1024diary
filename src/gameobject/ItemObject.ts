@@ -13,6 +13,7 @@ export class ItemObject extends AABBCollidableObject {
         super();
         this.sprite = new PIXI.AnimatedSprite(texture);
         this.sprite.animationSpeed = 0.1;
+        this.sprite.zIndex = 99;
         this.sprite.play();
         this.x = initialX;
         this.y = initialY;

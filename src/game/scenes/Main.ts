@@ -141,7 +141,7 @@ export class MainScene extends AbstractScene {
             onHover: GameInstance().resources['ccj_hover'].texture,
             onDown: GameInstance().resources['ccj_hover'].texture,
         }
-        const shareButton = new ButtonObject('ccjButton', 245, 470, 150, 75, shareButtonTextures, {
+        const shareButton = new ButtonObject('shareButton', 245, 470, 150, 75, shareButtonTextures, {
             onUp: shareByKakaoTalk,
             cancel: setTexture,
             onHover: setTexture,
@@ -154,7 +154,7 @@ export class MainScene extends AbstractScene {
             onHover: GameInstance().resources['ccj_hover'].texture,
             onDown: GameInstance().resources['ccj_hover'].texture,
         }
-        const licenseButton = new ButtonObject('ccjButton', 405, 470, 150, 75, licenseButtonTextures, {
+        const licenseButton = new ButtonObject('licenseButton', 405, 470, 150, 75, licenseButtonTextures, {
             onUp: () => {
                 showLicenseInformation(this)
             },

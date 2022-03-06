@@ -4,6 +4,13 @@ import * as BACKGROUND_IMAGE from './background.jpg';
 import * as BG_INIT_STAGE1 from './bg1-obj-stage2.png';
 import * as BG_STAGE1 from './bg1.png';
 import * as BG_STAGE1_WINDOW from './bg1-obj-window.png';
+import * as POT from './bg1-obj-pot.png';
+import * as BG_STAGE2 from './bg2.png';
+import * as BG_STAGE2_LINGO from './bg2-lingo.png';
+import * as BG_NEON1 from './bg2-neon1.png';
+import * as BG_NEON2 from './bg2-neon2.png';
+import * as BG_NEON3 from './bg2-neon3.png';
+import * as BG_NEON4 from './bg2-neon4.png';
 import * as ADMIT_IMAGE from './admit.png';
 import * as CONE_IMAGE from './cone.png';
 import * as LOGO_TEXTURE from './logo.png';
@@ -44,6 +51,13 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('bg1-init', BG_INIT_STAGE1)
         .add('bg1', BG_STAGE1)
         .add('bg1-window', BG_STAGE1_WINDOW)
+        .add('pot', POT)
+        .add('bg2', BG_STAGE2)
+        .add('bg2-lingo', BG_STAGE2_LINGO)
+        .add('bg2-neon1', BG_NEON1)
+        .add('bg2-neon2', BG_NEON2)
+        .add('bg2-neon3', BG_NEON3)
+        .add('bg2-neon4', BG_NEON4)
         .add('character1', CHAR_SUCKZOO_1)
         .add('character2', CHAR_SUCKZOO_2)
         .add('character3', CHAR_SUCKZOO_3)

@@ -38,10 +38,8 @@ export class PIXIApp {
         width: number,
         height: number
     }) {
-        // this.mode = 'RandomPlay';
         this.mode = 'None';
         this.currentScene = null;
-        // this.mode = 'Record';
         this.width = width;
         this.height = height;
         this.app = new PIXI.Application({
