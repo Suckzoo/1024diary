@@ -21,6 +21,7 @@ import * as LOCK_PICTURE from './lock.png';
 import * as X_TEXTURE from './x.png';
 import * as CHAR_SUCKZOO_1 from './char-1.png';
 import * as CHAR_SUCKZOO_2 from './char-2.png';
+export * as THUMBNAIL from './char-2.png';
 import * as CHAR_SUCKZOO_3 from './char-3.png';
 import * as CHAR_SUCKZOO_4 from './char-4.png';
 import * as ITEM_MACBOOK from './item-macbook-1.png';
