@@ -10,14 +10,17 @@ function setTexture(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event:
     btn.texture = btn.texturesOnEvent[eventType];
 }
 function playGame(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
-    sound.play('sword_sound');
+    sound.play('pickup_sound');
     btn.texture = btn.texturesOnEvent[eventType];
     GameInstance().play();
 }
 function launchGallery(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
-    sound.play('sword_sound');
+    sound.play('pickup_sound');
     btn.texture = btn.texturesOnEvent[eventType];
     GameInstance().launchGallery();
+}
+function openInvitation(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
+    location.href = 'https://suckzoo.github.io/wedding-invitation';
 }
 function toBeImplemented(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
     btn.texture = btn.texturesOnEvent[eventType];
@@ -28,6 +31,8 @@ export class MainScene extends AbstractScene {
         super(app);
     }
     load(): void {
+        const background = new UISpriteObject('background', 0, 0, 800, 500, GameInstance().resources['bg1-init'].texture);
+        this.add(background);
         const logo = new UISpriteObject('logo', 150, 100, 500, 150, GameInstance().resources['logo'].texture);
         this.add(logo);
         const playButtonTextures: TexturesOnEvent = {
@@ -63,7 +68,7 @@ export class MainScene extends AbstractScene {
             onDown: GameInstance().resources['ccj_hover'].texture,
         }
         const ccjButton = new ButtonObject('ccjButton', 325, 470, 150, 75, ccjButtonTextures, {
-            onUp: toBeImplemented,
+            onUp: openInvitation,
             cancel: setTexture,
             onHover: setTexture,
             onDown: setTexture

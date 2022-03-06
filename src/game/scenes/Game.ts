@@ -8,16 +8,12 @@ import { AbstractScene } from "./Scene";
 
 export class GameScene extends AbstractScene {
     mode: 'None' | 'Record' | 'Play' | 'RandomPlay' = 'None';
+    bgQueue: BackgroundObject[] = [];
     constructor(app: PIXIApp) {
         super(app);
         this.mode = 'Play';
     }
     load(): void {
-        const background1 = new BackgroundObject('background1', 0, 800, 600);
-        this.add(background1);
-        const background2 = new BackgroundObject('background2', 800, 800, 600);
-        this.add(background2);
-
         // Character Object
         const character = new CharacterObject()
         this.add(character);
@@ -41,9 +37,16 @@ export class GameScene extends AbstractScene {
         this.app.resetElapsed();
         LevelGenerator(this, character);
     }
+    addBackgroundParticle(particle: BackgroundObject): void {
+        this.bgQueue.push(particle);
+        this.add(particle);
+    }
     update(delta: number, elapsed: number): void {
         this.objects.forEach(object => {
             object.update(delta, elapsed);
+        })
+        this.container.children.sort((a, b) => {
+            return (a.zIndex || 0) - (b.zIndex || 0);
         })
         this.objects.forEach(object => {
             if (object instanceof AABBCollidableObject) {

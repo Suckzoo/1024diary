@@ -116,6 +116,8 @@ export class PIXIApp {
         this.elapsed = 0;
     }
     finish() {
+        alert('Thank you for playing!');
+        this.loadScene('Main');
     }
     over() {
         alert('Game over!');

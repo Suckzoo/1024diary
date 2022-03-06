@@ -1,7 +1,9 @@
 import * as PIXI from 'pixi.js';
-import * as PIXISound from '@pixi/sound';
 
 import * as BACKGROUND_IMAGE from './background.jpg';
+import * as BG_INIT_STAGE1 from './bg1-obj-stage2.png';
+import * as BG_STAGE1 from './bg1.png';
+import * as BG_STAGE1_WINDOW from './bg1-obj-window.png';
 import * as ADMIT_IMAGE from './admit.png';
 import * as CONE_IMAGE from './cone.png';
 import * as LOGO_TEXTURE from './logo.png';
@@ -27,7 +29,9 @@ import * as ITEM_LINGO from './item-lingo-1.png';
 import * as ITEM_LINGO_GLOW from './item-lingo-2.png';
 import * as ITEM_RING from './item-propose-1.png';
 import * as ITEM_RING_GLOW from './item-propose-2.png';
-import * as SWORD_SOUND from './sword.mp3';
+import * as PICKUP_SOUND from './pickup.wav';
+import * as JUMP_SOUND from './jump.wav';
+import * as LASER_SOUND from './laser.wav';
 
 interface LoaderAndResources {
     Loader: PIXI.Loader,
@@ -36,6 +40,9 @@ interface LoaderAndResources {
 export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
     loader
         .add('background', BACKGROUND_IMAGE)
+        .add('bg1-init', BG_INIT_STAGE1)
+        .add('bg1', BG_STAGE1)
+        .add('bg1-window', BG_STAGE1_WINDOW)
         .add('character1', CHAR_SUCKZOO_1)
         .add('character2', CHAR_SUCKZOO_2)
         .add('character3', CHAR_SUCKZOO_3)
@@ -61,7 +68,9 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('lingo-glow', ITEM_LINGO_GLOW)
         .add('ring', ITEM_RING)
         .add('ring-glow', ITEM_RING_GLOW)
-        .add('sword_sound', SWORD_SOUND)
+        .add('pickup_sound', PICKUP_SOUND)
+        .add('laser_sound', LASER_SOUND)
+        .add('jump_sound', JUMP_SOUND)
     return new Promise<LoaderAndResources>(resolve => {
         loader.load((loader, resources) => {
             resolve({

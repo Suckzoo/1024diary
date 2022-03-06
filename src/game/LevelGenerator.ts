@@ -8,8 +8,10 @@ import Level from './level.json';
 import { GameScene } from "./scenes/Game";
 import { TextCloudObject } from "../gameobject/TextCloudObject";
 import { PopupWithDescriptionObject } from "../gameobject/UI/PopupWithDescriptionObject";
+import { BackgroundObject } from "../gameobject/BackgroundObject";
+import { v4 as uuidv4 } from 'uuid';
 
-const GROUND_Y = 528;
+const GROUND_Y = 499;
 const OBSTACLE_HEIGHT_DEFAULT = 64;
 const OBSTACLE_HEIGHT_DOUBLE = 128;
 
@@ -39,67 +41,114 @@ function ReadLevelAndGenerate(scene: GameScene, character: CharacterObject): voi
     
     const objects = [];
     let lastCoinIndex = 0;
+    let lastBgIndex = 0;
+    let lastRepeat = 0;
+    let gameFinished = false;
     const interval = setInterval(() => {
-        if (lastCoinIndex > Level.length - 1) {
-            setTimeout(() => {
+        const bgSeq = Level.backgroundSequence;
+        if (lastBgIndex === bgSeq.length) {
+            if (!gameFinished) {
+                gameFinished = true;
                 clearInterval(interval);
                 scene.app.finish();
-            }, 5 * 1000);
-        }
-        if (scene.app.elapsed < Level[lastCoinIndex].t) {
-            return;
-        }
-        if (Level[lastCoinIndex].itemType === 'item') {
-            const key: string = Level[lastCoinIndex]['itemKey']!
-            const {gallX, gallY} = Level[lastCoinIndex]['gallerySecretCoord']!;
-            const v = Level[lastCoinIndex].v;
-            const alt = Level[lastCoinIndex].y;
-            const coin = ItemObject.spawn(800, alt, v, ItemTextures[key]);
-            coin.hits(character, (coin, _character) => {
-                localStorage.setItem(`secret${gallX}${gallY}`, 'true');
-                scene.remove(coin);
-                sound.play('sword_sound')
-                const popup = new PopupWithDescriptionObject(
-                    `preview-secret${gallX}${gallY}`,
-                    0,
-                    0,
-                    'wow',
-                    '우리 만나볼래요?',
-                    () => {
-                        scene.removeById(`preview-secret${gallX}${gallY}`);
-                        scene.app.resumeTimer();
-                    }
-                );
-                scene.add(popup);
-                scene.app.stopTimer();
-            })
-            objects.push(coin);
-            scene.add(coin);
-            lastCoinIndex++;
-        } else if (Level[lastCoinIndex].itemType === 'textCloud') {
-            const y = Level[lastCoinIndex].y;
-            const v = Level[lastCoinIndex].v;
-            const text = Level[lastCoinIndex]['text']!;
-            const textCloud = TextCloudObject.spawn(800, y, v, text)
-            lastCoinIndex++;
-            objects.push(textCloud);
-            scene.add(textCloud);
-        } else {
-            const y = Level[lastCoinIndex].y;
-            const v = Level[lastCoinIndex++].v;
-            const obstacle = ObstacleObject.spawn(800, y, 32, (GROUND_Y - y) * 2, v);
-            obstacle.hits(character, (obstacle, _character) => {
-                scene.app.over();
-            })
-            objects.push(obstacle);
-            scene.add(obstacle);
-        }
-        objects.forEach((coin, index) => {
-            if (coin.isDisposable()) {
-                scene.remove(coin);
-                objects.splice(index, 1);
             }
+        }
+        const disposable = scene.bgQueue.filter(bg => bg.isDisposable());
+        scene.bgQueue.splice(0, disposable.length);
+        disposable.forEach(bg => {
+            scene.remove(bg);
         })
+        if (scene.bgQueue.length === 0) {
+            const bgKey = bgSeq[lastBgIndex].bgKey;
+            const bgParticle = new BackgroundObject(
+                `bg-${bgKey}-${uuidv4()}`,
+                bgKey,
+                0,
+                bgSeq[lastBgIndex].width,
+                500,
+            )
+            scene.addBackgroundParticle(bgParticle);
+            lastRepeat++;
+            if (lastRepeat === bgSeq[lastBgIndex].repeat) {
+                lastBgIndex++;
+                lastRepeat = 0;
+            }
+        }
+        let widthSum = scene.bgQueue.reduce((sum, bg) => sum + bg.width, 0);
+        while (scene.bgQueue[0].x + widthSum < 850) {
+            const shiftX = 850 - (scene.bgQueue[0].x + widthSum);
+            console.log(lastBgIndex);
+            console.log(bgSeq[lastBgIndex].bgKey);
+            const bgParticle = new BackgroundObject(
+                `bg-${bgSeq[lastBgIndex].bgKey}-${uuidv4()}`,
+                bgSeq[lastBgIndex].bgKey,
+                850 - shiftX,
+                bgSeq[lastBgIndex].width,
+                500
+            )
+            scene.addBackgroundParticle(bgParticle);
+            widthSum += bgSeq[lastBgIndex].width;
+            lastRepeat++;
+            if (lastRepeat === bgSeq[lastBgIndex].repeat) {
+                lastBgIndex++;
+                lastRepeat = 0;
+            }
+        }
+        const objSeq = Level.objectSequence;
+        if (lastCoinIndex < objSeq.length && scene.app.elapsed >= objSeq[lastCoinIndex].t) {
+            if (objSeq[lastCoinIndex].itemType === 'item') {
+                const key: string = objSeq[lastCoinIndex]['itemKey']!
+                const { x: gallX, y: gallY } = objSeq[lastCoinIndex]['gallerySecretCoord']!;
+                const v = objSeq[lastCoinIndex].v;
+                const alt = objSeq[lastCoinIndex].y;
+                const coin = ItemObject.spawn(800, alt, v, ItemTextures[key]);
+                coin.hits(character, (coin, _character) => {
+                    localStorage.setItem(`secret${gallX}${gallY}`, 'true');
+                    scene.remove(coin);
+                    sound.play('pickup_sound')
+                    const popup = new PopupWithDescriptionObject(
+                        `preview-secret${gallX}${gallY}`,
+                        0,
+                        0,
+                        'wow',
+                        '우리 만나볼래요?',
+                        () => {
+                            scene.removeById(`preview-secret${gallX}${gallY}`);
+                            scene.app.resumeTimer();
+                        }
+                    );
+                    scene.add(popup);
+                    scene.app.stopTimer();
+                })
+                objects.push(coin);
+                scene.add(coin);
+                lastCoinIndex++;
+            } else if (objSeq[lastCoinIndex].itemType === 'textCloud') {
+                // const y = objSeq[lastCoinIndex].y;
+                // const v = objSeq[lastCoinIndex].v;
+                // const text = objSeq[lastCoinIndex].text!;
+                // const textCloud = TextCloudObject.spawn(800, y, v, text)
+                // lastCoinIndex++;
+                // objects.push(textCloud);
+                // scene.add(textCloud);
+            } else {
+                const y = objSeq[lastCoinIndex].y;
+                const v = objSeq[lastCoinIndex++].v;
+                const obstacle = ObstacleObject.spawn(800, y, 32, (GROUND_Y - y) * 2, v);
+                obstacle.hits(character, (obstacle, _character) => {
+                    scene.app.over();
+                })
+                objects.push(obstacle);
+                scene.add(obstacle);
+            }
+            objects.forEach((coin, index) => {
+                if (coin.isDisposable()) {
+                    scene.remove(coin);
+                    objects.splice(index, 1);
+                }
+            })
+        }
+        
     }, 100)
 }
 

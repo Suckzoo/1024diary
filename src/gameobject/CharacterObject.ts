@@ -10,7 +10,7 @@ type CharacterStatus = {
     secondJump: boolean
 }
 
-const GROUND_Y = 400;
+const GROUND_Y = 371;
 const INITIAL_VELOCITY = 12.5;
 const GRAVITY = 0.5;
 
@@ -31,7 +31,7 @@ export class CharacterObject extends AABBCollidableObject {
         this.sprite.animationSpeed = 0.1;
         this.sprite.play();
         this.x = 64;
-        this.y = 400;
+        this.y = GROUND_Y;
         this.width = 172;
         this.height = 129;
         this.rotation = 0;
@@ -45,7 +45,7 @@ export class CharacterObject extends AABBCollidableObject {
     jump(): void {
         if (this.status !== 'secondJump') {
             this.sprite.stop();
-            sound.play('sword_sound');
+            sound.play('jump_sound');
         }
         if (this.status === 'onGround') {
             this.refTime = this.elapsed;

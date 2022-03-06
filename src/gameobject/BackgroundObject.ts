@@ -7,10 +7,11 @@ const VELOCITY = 6;
 export class BackgroundObject extends SpriteGameObject {
     sprite: PIXI.Sprite;
     id: string;
-    constructor(id: string, initialX: number, width: number, height: number) {
+    constructor(id: string, resourceKey: string, initialX: number, width: number, height: number) {
         super();
-        const spriteImage = GameInstance().resources['background'].texture;
+        const spriteImage = GameInstance().resources[resourceKey].texture;
         this.sprite = new PIXI.Sprite(spriteImage);
+        this.sprite.zIndex = -9999;
         this.x = initialX;
         this.y = 0;
         this.width = width;
@@ -23,9 +24,8 @@ export class BackgroundObject extends SpriteGameObject {
     }
     update(delta: number, _elapsed: number): void {
         this.x = this.x - VELOCITY * delta;
-        if (this.x < -this.width) {
-            const delta = -this.width - this.x;
-            this.x = this.width - delta;
-        }
+    }
+    isDisposable() {
+        return this.x < -this.width;
     }
 }
