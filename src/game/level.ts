@@ -116,7 +116,7 @@ const level: Sequence = {
             "textureKey": "bg2-neon3"
         },
         {
-            "x": 4478,
+            "x": 4900,
             "y": 100,
             "itemType": "backgroundHelper",
             "width": 167,
@@ -124,7 +124,7 @@ const level: Sequence = {
             "textureKey": "bg2-neon4"
         },
         {
-            "x": 4700,
+            "x": 5100,
             "y": 0,
             "itemType": "backgroundHelper",
             "width": 1185,
