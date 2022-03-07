@@ -7,6 +7,7 @@ import * as BG_STAGE1_WINDOW from './bg1-obj-window.png';
 import * as POT from './bg1-obj-pot.png';
 import * as BG_STAGE2 from './bg2.png';
 import * as BG_STAGE2_LINGO from './bg2-lingo.png';
+import * as BG_STAGE2_TOT from './bg2-tot.png';
 import * as BG_NEON1 from './bg2-neon1.png';
 import * as BG_NEON2 from './bg2-neon2.png';
 import * as BG_NEON3 from './bg2-neon3.png';
@@ -58,6 +59,7 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('bg2-neon2', BG_NEON2)
         .add('bg2-neon3', BG_NEON3)
         .add('bg2-neon4', BG_NEON4)
+        .add('bg2-tot', BG_STAGE2_TOT)
         .add('character1', CHAR_SUCKZOO_1)
         .add('character2', CHAR_SUCKZOO_2)
         .add('character3', CHAR_SUCKZOO_3)
