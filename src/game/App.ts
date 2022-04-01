@@ -3,7 +3,6 @@ import FontFaceObserver from 'fontfaceobserver';
 import { AbstractScene } from "./scenes/Scene";
 import { MainScene } from "./scenes/Main";
 import { GameScene } from "./scenes/Game";
-import { GalleryScene } from "./scenes/Gallery";
 import { LoadSprites } from "../assets";
 
 let Game: PIXIApp | null = null;
@@ -14,7 +13,7 @@ interface Modes {
     RandomPlay: boolean;
 };
 
-type Mode = "None" | "Main" | "Game" | "Gallery";
+type Mode = "None" | "Main" | "Game";
 
 export class PIXIApp {
     mode: Mode;
@@ -75,8 +74,6 @@ export class PIXIApp {
             this.currentScene = new MainScene(this);
         } else if (mode === 'Game') {
             this.currentScene = new GameScene(this);
-        } else if (mode === 'Gallery') {
-            this.currentScene = new GalleryScene(this);
         }
         this.currentScene.load();
         this.app.stage.addChild(this.currentScene.container);
@@ -91,9 +88,6 @@ export class PIXIApp {
     }
     play() {
         this.loadScene('Game');
-    }
-    launchGallery() {
-        this.loadScene('Gallery');
     }
     launchMainScene() {
         this.loadScene('Main');

@@ -1,7 +1,6 @@
 import * as PIXI from "pixi.js";
 import { SpriteGameObject } from "../SpriteGameObject";
 
-const VELOCITY = 10;
 
 export class UISpriteObject extends SpriteGameObject {
     sprite: PIXI.Sprite;

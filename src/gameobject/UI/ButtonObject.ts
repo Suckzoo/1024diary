@@ -1,7 +1,6 @@
 import * as PIXI from "pixi.js";
 import { UISpriteObject } from "./UISpriteObject";
 
-const VELOCITY = 10;
 
 export interface TexturesOnEvent {
     onUp: PIXI.Texture;

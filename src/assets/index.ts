@@ -12,8 +12,7 @@ import * as BG_NEON1 from './bg2-neon1.png';
 import * as BG_NEON2 from './bg2-neon2.png';
 import * as BG_NEON3 from './bg2-neon3.png';
 import * as BG_NEON4 from './bg2-neon4.png';
-import * as ADMIT_IMAGE from './admit.png';
-import * as CONE_IMAGE from './cone.png';
+import * as BG_STAGE3 from './bg3-kame.png';
 import * as LOGO_TEXTURE from './logo.png';
 import * as PLAY_TEXTURE from './play.png';
 import * as PLAY_HOVER_TEXTURE from './play_hover.png';
@@ -29,7 +28,6 @@ import * as LOCK_PICTURE from './lock.png';
 import * as X_TEXTURE from './x.png';
 import * as CHAR_SUCKZOO_1 from './char-1.png';
 import * as CHAR_SUCKZOO_2 from './char-2.png';
-export * as THUMBNAIL from './char-2.png';
 import * as CHAR_SUCKZOO_3 from './char-3.png';
 import * as CHAR_SUCKZOO_4 from './char-4.png';
 import * as ITEM_MACBOOK from './item-macbook-1.png';
@@ -38,6 +36,14 @@ import * as ITEM_LINGO from './item-lingo-1.png';
 import * as ITEM_LINGO_GLOW from './item-lingo-2.png';
 import * as ITEM_RING from './item-propose-1.png';
 import * as ITEM_RING_GLOW from './item-propose-2.png';
+import * as ITEM_MUSIC from './item-music-1.png';
+import * as ITEM_MUSIC_GLOW from './item-music-2.png';
+import * as ITEM_SUSHI from './item-sushi-1.png';
+import * as ITEM_SUSHI_GLOW from './item-sushi-2.png';
+import * as ITEM_TAIKO from './item-taiko-1.png';
+import * as ITEM_TAIKO_GLOW from './item-taiko-2.png';
+import * as ITEM_CAT from './item-cat-1.png';
+import * as ITEM_CAT_GLOW from './item-cat-2.png';
 import * as PICKUP_SOUND from './pickup.wav';
 import * as JUMP_SOUND from './jump.wav';
 import * as LASER_SOUND from './laser.wav';
@@ -60,12 +66,11 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('bg2-neon3', BG_NEON3)
         .add('bg2-neon4', BG_NEON4)
         .add('bg2-tot', BG_STAGE2_TOT)
+        .add('bg3', BG_STAGE3)
         .add('character1', CHAR_SUCKZOO_1)
         .add('character2', CHAR_SUCKZOO_2)
         .add('character3', CHAR_SUCKZOO_3)
         .add('character4', CHAR_SUCKZOO_4)
-        .add('admit', ADMIT_IMAGE)
-        .add('cone', CONE_IMAGE)
         .add('logo', LOGO_TEXTURE)
         .add('play', PLAY_TEXTURE)
         .add('play_hover', PLAY_HOVER_TEXTURE)
@@ -85,6 +90,14 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('lingo-glow', ITEM_LINGO_GLOW)
         .add('ring', ITEM_RING)
         .add('ring-glow', ITEM_RING_GLOW)
+        .add('music', ITEM_MUSIC)
+        .add('music-glow', ITEM_MUSIC_GLOW)
+        .add('sushi', ITEM_SUSHI)
+        .add('sushi-glow', ITEM_SUSHI_GLOW)
+        .add('taiko', ITEM_TAIKO)
+        .add('taiko-glow', ITEM_TAIKO_GLOW)
+        .add('cat', ITEM_CAT)
+        .add('cat-glow', ITEM_CAT_GLOW)
         .add('pickup_sound', PICKUP_SOUND)
         .add('laser_sound', LASER_SOUND)
         .add('jump_sound', JUMP_SOUND)

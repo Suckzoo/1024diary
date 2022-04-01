@@ -101,16 +101,14 @@ function spawnObjects(
         const initX = objSeq[lastItemIndex].x - X;
         if (objSeq[lastItemIndex].itemType === 'item') {
             const key: string = objSeq[lastItemIndex]['itemKey']!
-            const { x: gallX, y: gallY } = objSeq[lastItemIndex]['gallerySecretCoord']!;
             const v = objSeq[lastItemIndex].v || BACKGROUND_VELOCITY;
             const alt = objSeq[lastItemIndex].y;
             const coin = ItemObject.spawn(initX, alt, v, ItemTextures[key]);
             coin.hits(character, (coin, _character) => {
-                localStorage.setItem(`secret${gallX}${gallY}`, 'true');
                 scene.remove(coin);
                 sound.play('pickup_sound')
                 const popup = new PopupObject(
-                    `preview-secret${gallX}${gallY}`,
+                    `preview-secret-${key}`,
                     (container: PopupObject) => {
                         const pictureObj = new UISpriteObject(`${container.id}#pics`, 100, 100, 600, 400, GameInstance().resources['wow'].texture);
                         container.add(pictureObj);
@@ -121,7 +119,7 @@ function spawnObjects(
                         container.add(descriptionObj);
                     },
                     () => {
-                        scene.removeById(`preview-secret${gallX}${gallY}`);
+                        scene.removeById(`preview-secret-${key}`);
                         scene.app.resumeTimer();
                     }
                 );

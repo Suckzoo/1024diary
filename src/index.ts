@@ -34,9 +34,4 @@ function runGame() {
     })
 };
 
-function initKakaoSDK() {
-    Kakao.init(process.env.KAKAO_KEY);
-}
-
-initKakaoSDK();
 runGame();

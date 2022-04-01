@@ -23,10 +23,6 @@ export interface ObjectSequence {
     textureKey?: string,
     itemType: ObjectTypeKey,
     itemKey?: string,
-    gallerySecretCoord?: {
-        x: number,
-        y: number
-    }
 };
 
 export interface Sequence {
@@ -58,23 +54,38 @@ const level: Sequence = {
         },
         {
             "bgKey": "bg2",
-            "repeat": 100,
+            "repeat": 80,
             "width": 48
-        }
+        },
+        {
+            "bgKey": "bg3",
+            "repeat": 1,
+            "width": 1707
+        },
+        {
+            "bgKey": "bg2",
+            "repeat": 80,
+            "width": 48
+        },
     ],
     "objectSequence": [
         {
             "x": 1500,
             "y": 300.0,
             "itemType": "item",
-            "itemKey": "macbook",
-            "gallerySecretCoord": {
-                "x": 0,
-                "y": 0
-            }
+            "itemKey": "macbook"
         },
         {
             "x": 2431,
+            "y": 225,
+            "itemType": "backgroundHelper",
+            "width": 245,
+            "height": 345,
+            "textureKey": "pot",
+            "zIndex": 1000,
+        },
+        {
+            "x": 6271,
             "y": 225,
             "itemType": "backgroundHelper",
             "width": 245,
@@ -135,21 +146,37 @@ const level: Sequence = {
             "x": 3000,
             "y": 300.0,
             "itemType": "item",
-            "itemKey": "lingo",
-            "gallerySecretCoord": {
-                "x": 1,
-                "y": 0
-            }
+            "itemKey": "lingo"
         },
         {
             "x": 4500,
             "y": 300.0,
             "itemType": "item",
-            "itemKey": "ring",
-            "gallerySecretCoord": {
-                "x": 2,
-                "y": 0
-            }
+            "itemKey": "ring"
+        },
+        {
+            "x": 4700,
+            "y": 300.0,
+            "itemType": "item",
+            "itemKey": "music"
+        },
+        {
+            "x": 4900,
+            "y": 300.0,
+            "itemType": "item",
+            "itemKey": "taiko"
+        },
+        {
+            "x": 5100,
+            "y": 300.0,
+            "itemType": "item",
+            "itemKey": "cat"
+        },
+        {
+            "x": 7247,
+            "y": 300.0,
+            "itemType": "item",
+            "itemKey": "sushi",
         }
     ]
 }
