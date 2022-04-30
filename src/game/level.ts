@@ -183,7 +183,7 @@ function LevelSequence() {
                 "width": 1238,
                 "height": 328,
                 "zIndex": 1,
-                "v": 5
+                "v": 3
             },
             {
                 "x": 8101 + 1238 * 2 + 100,
@@ -193,7 +193,7 @@ function LevelSequence() {
                 "width": 1238,
                 "height": 328,
                 "zIndex": 1,
-                "v": 5
+                "v": 3
             },
         ],
         finaleXCoord: 0
