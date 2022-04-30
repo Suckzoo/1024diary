@@ -1,4 +1,5 @@
 import { AABBCollidableObject } from "../../gameobject/AABBCollidableObject";
+import { BackgroundHelperObject } from "../../gameobject/BackgroundHelperObject";
 import { BackgroundObject } from "../../gameobject/BackgroundObject";
 import { CharacterObject } from "../../gameobject/CharacterObject";
 import { ButtonObject, TexturesOnEvent } from "../../gameobject/UI/ButtonObject";
@@ -15,6 +16,7 @@ export class GameScene extends AbstractScene {
     lastItemIndex: number;
     lastBgIndex: number;
     lastBgRepeat: number;
+    finaleMode: boolean;
     constructor(app: PIXIApp) {
         super(app);
         this.mode = 'Play';
@@ -22,6 +24,7 @@ export class GameScene extends AbstractScene {
         this.lastItemIndex = 0;
         this.lastBgIndex = 0;
         this.lastBgRepeat = 0;
+        this.finaleMode = false;
     }
     load(): void {
         // Character Object
@@ -57,6 +60,10 @@ export class GameScene extends AbstractScene {
         this.bgQueue.push(particle);
         this.add(particle);
     }
+    startFinale() {
+        this.character.preventJump();
+        this.finaleMode = true;
+    }
     update(delta: number, elapsed: number): void {
         if (this.app.paused) {
             return;
@@ -69,9 +76,28 @@ export class GameScene extends AbstractScene {
         this.lastItemIndex = itemIdx;
         this.lastBgIndex = bgIdx;
         this.lastBgRepeat = bgRep;
-        this.objects.forEach(object => {
-            object.update(delta, elapsed);
-        })
+        if (!this.finaleMode) {
+            this.objects.forEach(object => {
+                object.update(delta, elapsed);
+            })
+        } else {
+            if (this.character.isLifecycleDone()) {
+                this.remove(this.character);
+                const charStand = new BackgroundHelperObject(
+                    'final-character',
+                    400 - 172/2,
+                    500 - 36 - 129,
+                    172,
+                    129,
+                    0,
+                    3,
+                    GameInstance().resources['character-stand'].texture
+                )
+                this.add(charStand);
+            } else {
+                this.character.updateForFinale(delta, elapsed);
+            }
+        }
         this.container.children.sort((a, b) => {
             return (a.zIndex || 0) - (b.zIndex || 0);
         })

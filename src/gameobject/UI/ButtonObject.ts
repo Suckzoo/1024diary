@@ -42,6 +42,7 @@ export class ButtonObject extends UISpriteObject {
 
             // set the mouseout callback...
             .on('mouseout', this.decorate('cancel'))
+        this.sprite.zIndex = 10000;
     }
     decorate(fnKey: keyof CallbacksOnEvent): (e: any) => void {
         return (e: any) => {

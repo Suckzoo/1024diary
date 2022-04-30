@@ -13,6 +13,11 @@ import * as BG_NEON2 from './bg2-neon2.png';
 import * as BG_NEON3 from './bg2-neon3.png';
 import * as BG_NEON4 from './bg2-neon4.png';
 import * as BG_STAGE3 from './bg3-kame.png';
+import * as BG_STAGE4 from './bg4-bg.png';
+import * as BG_STAGE4_BGFLOWERS from './bg4-bgflowers.png';
+import * as BG_FINAL from './bg-final.png';
+import * as BG4_CLOUD from './bg4-cloud.png';
+import * as BG4_FLOWERTILE from './bg4-flowertile.png';
 import * as LOGO_TEXTURE from './logo.png';
 import * as PLAY_TEXTURE from './play.png';
 import * as PLAY_HOVER_TEXTURE from './play_hover.png';
@@ -30,6 +35,7 @@ import * as CHAR_SUCKZOO_1 from './char-1.png';
 import * as CHAR_SUCKZOO_2 from './char-2.png';
 import * as CHAR_SUCKZOO_3 from './char-3.png';
 import * as CHAR_SUCKZOO_4 from './char-4.png';
+import * as CHAR_SUCKZOO_STAND from './char-stand.png';
 import * as ITEM_MACBOOK from './item-macbook-1.png';
 import * as ITEM_MACBOOK_GLOW from './item-macbook-2.png';
 import * as ITEM_LINGO from './item-lingo-1.png';
@@ -67,10 +73,15 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('bg2-neon4', BG_NEON4)
         .add('bg2-tot', BG_STAGE2_TOT)
         .add('bg3', BG_STAGE3)
+        .add('bg4-bg', BG_STAGE4)
+        .add('bg4-bgflowers', BG_STAGE4_BGFLOWERS)
+        .add('bg4-cloud', BG4_CLOUD)
+        .add('bg-final', BG_FINAL)
         .add('character1', CHAR_SUCKZOO_1)
         .add('character2', CHAR_SUCKZOO_2)
         .add('character3', CHAR_SUCKZOO_3)
         .add('character4', CHAR_SUCKZOO_4)
+        .add('character-stand', CHAR_SUCKZOO_STAND)
         .add('logo', LOGO_TEXTURE)
         .add('play', PLAY_TEXTURE)
         .add('play_hover', PLAY_HOVER_TEXTURE)

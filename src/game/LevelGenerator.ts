@@ -21,15 +21,10 @@ const OBSTACLE_HEIGHT_DOUBLE = 128;
 
 
 function isGameFinished(
-    bgQueue: BackgroundObject[],
-    bgSeq: BackgroundSequence[],
-    lastBgIndex: number
+    scene: GameScene,
 ): boolean {
-    if (lastBgIndex === bgSeq.length) {
-        const lastFrag = bgQueue[bgQueue.length - 1];
-        return (lastFrag.x + lastFrag.width < 800);
-    }
-    return false;
+    const X = scene.app.elapsed * BACKGROUND_VELOCITY;
+    return X >= Level.finaleXCoord;
 }
 
 function disposeOldBackgroundFragments(
@@ -96,7 +91,7 @@ function spawnObjects(
 ) {
     const ItemTextures = GameInstance().ItemTextures;
     const character = scene.character;
-    const X = scene.app.elapsed * BACKGROUND_VELOCITY;
+    const X = scene.app.elapsed * BACKGROUND_VELOCITY > Level.finaleXCoord ? Level.finaleXCoord : scene.app.elapsed * BACKGROUND_VELOCITY;
     while (lastItemIndex < objSeq.length && objSeq[lastItemIndex].x - X < 850) {
         const initX = objSeq[lastItemIndex].x - X;
         if (objSeq[lastItemIndex].itemType === 'item') {
@@ -105,6 +100,7 @@ function spawnObjects(
             const alt = objSeq[lastItemIndex].y;
             const coin = ItemObject.spawn(initX, alt, v, ItemTextures[key]);
             coin.hits(character, (coin, _character) => {
+                scene.character.freeze();
                 scene.remove(coin);
                 sound.play('pickup_sound')
                 const popup = new PopupObject(
@@ -119,6 +115,7 @@ function spawnObjects(
                         container.add(descriptionObj);
                     },
                     () => {
+                        scene.character.unfreeze();
                         scene.removeById(`preview-secret-${key}`);
                         scene.app.resumeTimer();
                     }
@@ -188,10 +185,10 @@ export function ReadLevelAndGenerate(
         lastBgIndex,
         lastBgRepeat
     )
-    if (isGameFinished(scene.bgQueue, bgSeq, lastBgIndex)) {
-        scene.app.finish();
-    }
     disposeOldBackgroundFragments(scene);
+    if (isGameFinished(scene)) {
+        scene.startFinale();
+    }
     if (lastItemIndex < objSeq.length) {
         lastItemIndex = spawnObjects(
             scene,

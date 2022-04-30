@@ -7,6 +7,7 @@ import { PIXIApp } from "../App";
 import { AbstractScene } from "./Scene";
 import { PopupObject } from "../../gameobject/UI/PopupObject";
 import { TextObject } from "../../gameobject/TextObject";
+import { BackgroundHelperObject } from "../../gameobject/BackgroundHelperObject";
 
 function setTexture(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
     btn.texture = btn.texturesOnEvent[eventType];
@@ -60,6 +61,10 @@ export class MainScene extends AbstractScene {
     load(): void {
         const background = new UISpriteObject('background', 0, 0, 800, 500, GameInstance().resources['bg1-init'].texture);
         this.add(background);
+        for(let i = 0; i < 17; i++) {
+            const helper = new BackgroundHelperObject(`bg1-${i}`, 800 - 48 * (i + 1), 0, 48, 500, 0, -10000, GameInstance().resources['bg1'].texture);
+            this.add(helper);
+        }
         const logo = new UISpriteObject('logo', 150, 100, 500, 150, GameInstance().resources['logo'].texture);
         this.add(logo);
         const playButtonTextures: TexturesOnEvent = {
@@ -91,5 +96,9 @@ export class MainScene extends AbstractScene {
         });
         this.add(licenseButton);
     }
-    update(delta: number, elapsed: number): void {}
+    update(delta: number, elapsed: number): void {
+        this.container.children.sort((a, b) => {
+            return (a.zIndex || 0) - (b.zIndex || 0);
+        })
+    }
 }

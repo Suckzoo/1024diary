@@ -8,12 +8,14 @@ type CharacterStatus = {
     onGround: boolean,
     jumping: boolean,
     secondJump: boolean,
-    frozen: boolean
+    frozen: boolean,
+    done: boolean
 }
 
 const GROUND_Y = 371;
 const INITIAL_VELOCITY = 12.5;
 const GRAVITY = 0.5;
+const FINALE_X_SPEED = 1.5;
 
 export class CharacterObject extends AABBCollidableObject {
     sprite: PIXI.AnimatedSprite
@@ -24,6 +26,8 @@ export class CharacterObject extends AABBCollidableObject {
     secondJumpRefY: number;
     elapsed: number;
     status: keyof CharacterStatus;
+    finalJump: boolean;
+    jumpPrevented: boolean;
     constructor() {
         super();
         this.sprite = new PIXI.AnimatedSprite([
@@ -45,12 +49,21 @@ export class CharacterObject extends AABBCollidableObject {
         this.frozenRef = 0;
         this.frozenStatus = 'frozen';
         this.status = 'onGround';
+        this.finalJump = false;
+        this.jumpPrevented = false;
         this.registerEventHandlers();
     }
     stringify(): string {
         return 'character';
     }
-    jump(): void {
+    preventJump(): void {
+        console.log("Finale mode: jump prevented");
+        this.jumpPrevented = true;
+    }
+    jump(force: boolean = false): void {
+        if (this.jumpPrevented && !force) return;
+        if (this.finalJump) return;
+        if (this.status === 'frozen') return;
         if (this.status !== 'secondJump') {
             this.sprite.stop();
             sound.play('jump_sound');
@@ -86,7 +99,41 @@ export class CharacterObject extends AABBCollidableObject {
             const dt = elapsed - this.refTime;
             this.y = this.secondJumpRefY - (INITIAL_VELOCITY * dt - 0.5 * GRAVITY * dt * dt);
         }
-        if (this.y >= GROUND_Y) {
+        if (this.status !== 'onGround' && this.y >= GROUND_Y) {
+            this.sprite.play();
+            this.status = 'onGround';
+            this.y = GROUND_Y;
+        }
+    }
+    isLifecycleDone(): boolean {
+        return this.status === 'done';
+    }
+    updateForFinale(delta: number, elapsed: number): void {
+        this.elapsed = elapsed;
+        this.x += delta * FINALE_X_SPEED;
+        if (this.status === 'onGround') {
+            if (!this.finalJump && this.x >= 400 - this.width / 2 - 46 * FINALE_X_SPEED) {
+                this.jump(true);
+                this.finalJump = true;
+            } else if (this.finalJump) {
+                this.x = 400 - this.width / 2;
+            }
+        } else if (this.status === 'jumping') {
+            const dt = elapsed - this.refTime;
+            this.y = GROUND_Y - (INITIAL_VELOCITY * dt - 0.5 * GRAVITY * dt * dt); 
+        } else if (this.status === 'secondJump') {
+            const dt = elapsed - this.refTime;
+            this.y = this.secondJumpRefY - (INITIAL_VELOCITY * dt - 0.5 * GRAVITY * dt * dt);
+        }
+        if (this.finalJump) {
+            const dt = elapsed - this.refTime;
+            const v = INITIAL_VELOCITY - dt * GRAVITY;
+            if (this.y >= GROUND_Y - 36 && v < 0) {
+                this.x = 400 - this.width / 2;
+                this.y = GROUND_Y - 36;
+                this.status = 'done';
+            }
+        } else if (!this.finalJump && this.status !== 'onGround' && this.y >= GROUND_Y) {
             this.sprite.play();
             this.status = 'onGround';
             this.y = GROUND_Y;
