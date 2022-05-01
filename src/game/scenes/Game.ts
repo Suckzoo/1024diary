@@ -17,7 +17,7 @@ export class GameScene extends AbstractScene {
     lastItemIndex: number;
     lastBgIndex: number;
     lastBgRepeat: number;
-    finaleMode: boolean;
+    status: 'playing' | 'waitCharacterToFinishLifecycle' | 'endroll' | 'finished';
     jumpButton: ButtonObject;
     constructor(app: PIXIApp) {
         super(app);
@@ -26,7 +26,7 @@ export class GameScene extends AbstractScene {
         this.lastItemIndex = 0;
         this.lastBgIndex = 0;
         this.lastBgRepeat = 0;
-        this.finaleMode = false;
+        this.status = 'playing';
         const jumpButtonTextures: TexturesOnEvent = {
             onUp: GameInstance().resources['ui-button-jump'].texture,
             cancel: GameInstance().resources['ui-button-jump'].texture,
@@ -77,13 +77,13 @@ export class GameScene extends AbstractScene {
     }
     startFinale() {
         this.character.preventJump();
-        this.finaleMode = true;
+        this.status = 'waitCharacterToFinishLifecycle';
     }
     update(delta: number, elapsed: number): void {
         if (this.app.paused) {
             return;
         }
-        if (!this.finaleMode) {
+        if (this.status === 'playing') {
             const {
                 lastItemIndex: itemIdx,
                 lastBgIndex: bgIdx,
@@ -95,7 +95,8 @@ export class GameScene extends AbstractScene {
             this.objects.forEach(object => {
                 object.update(delta, elapsed);
             })
-        } else {
+        } else if (this.status === 'waitCharacterToFinishLifecycle') {
+            this.character.updateForFinale(delta, elapsed);
             if (this.character.isLifecycleDone()) {
                 this.remove(this.character);
                 const charStand = new BackgroundHelperObject(
@@ -109,9 +110,13 @@ export class GameScene extends AbstractScene {
                     GameInstance().resources['character-stand'].texture
                 )
                 this.add(charStand);
-            } else {
-                this.character.updateForFinale(delta, elapsed);
+                this.status = 'endroll';
             }
+        } else if (this.status === 'endroll') {
+            //TODO
+        } else {
+            // this.status === finished
+            // do nothing
         }
         this.container.children.sort((a, b) => {
             return (a.zIndex || 0) - (b.zIndex || 0);
