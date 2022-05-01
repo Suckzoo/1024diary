@@ -7,6 +7,7 @@ import { GameInstance, PIXIApp } from "../App";
 import { ObjectType } from "../level";
 import { ReadLevelAndGenerate } from "../LevelGenerator";
 import { AbstractScene } from "./Scene";
+import { KeyboardEventHandler } from '../../eventhandlers/KeyboardEventHandler';
 
 export class GameScene extends AbstractScene {
     mode: 'None' | 'Record' | 'Play' | 'RandomPlay' = 'None';
@@ -17,6 +18,7 @@ export class GameScene extends AbstractScene {
     lastBgIndex: number;
     lastBgRepeat: number;
     finaleMode: boolean;
+    jumpButton: ButtonObject;
     constructor(app: PIXIApp) {
         super(app);
         this.mode = 'Play';
@@ -25,18 +27,13 @@ export class GameScene extends AbstractScene {
         this.lastBgIndex = 0;
         this.lastBgRepeat = 0;
         this.finaleMode = false;
-    }
-    load(): void {
-        // Character Object
-        this.add(this.character);
-
         const jumpButtonTextures: TexturesOnEvent = {
-            onUp: GameInstance().resources['back'].texture,
-            cancel: GameInstance().resources['back'].texture,
-            onHover: GameInstance().resources['back'].texture,
-            onDown: GameInstance().resources['back'].texture,
+            onUp: GameInstance().resources['ui-button-jump'].texture,
+            cancel: GameInstance().resources['ui-button-jump'].texture,
+            onHover: GameInstance().resources['ui-button-jump'].texture,
+            onDown: GameInstance().resources['ui-button-jump-pressed'].texture,
         }
-        const jumpButton = new ButtonObject('jumpbutton', 600, 500, 200, 100, jumpButtonTextures, {
+        this.jumpButton = new ButtonObject('jumpbutton', 0, 500, 800, 100, jumpButtonTextures, {
             onUp: () => {},
             onDown: () => {
                 this.character.jump();
@@ -44,13 +41,23 @@ export class GameScene extends AbstractScene {
             onHover: () => {},
             cancel: () => {}
         });
-        this.add(jumpButton);
+        KeyboardEventHandler.down(' ', () => {
+            this.jumpButton.invoke('onDown', null);
+        })
+        KeyboardEventHandler.up(' ', () => {
+            this.jumpButton.invoke('onUp', null);
+        })
+    }
+    load(): void {
+        // Character Object
+        this.add(this.character);
+        this.add(this.jumpButton);
 
         this.app.resetElapsed();
         const {
             lastItemIndex: itemIdx,
             lastBgIndex: bgIdx,
-            lastBgRepeat: bgRep
+            lastBgRepeat: bgRep,
         } = ReadLevelAndGenerate(this, this.lastItemIndex, this.lastBgIndex, this.lastBgRepeat);
         this.lastItemIndex = itemIdx;
         this.lastBgIndex = bgIdx;
@@ -60,6 +67,14 @@ export class GameScene extends AbstractScene {
         this.bgQueue.push(particle);
         this.add(particle);
     }
+    freeze(): void {
+        this.jumpButton.disable();
+        this.character.freeze();
+    }
+    unfreeze(): void {
+        this.jumpButton.enable();
+        this.character.unfreeze();
+    }
     startFinale() {
         this.character.preventJump();
         this.finaleMode = true;
@@ -68,15 +83,15 @@ export class GameScene extends AbstractScene {
         if (this.app.paused) {
             return;
         }
-        const {
-            lastItemIndex: itemIdx,
-            lastBgIndex: bgIdx,
-            lastBgRepeat: bgRep
-        } = ReadLevelAndGenerate(this, this.lastItemIndex, this.lastBgIndex, this.lastBgRepeat);
-        this.lastItemIndex = itemIdx;
-        this.lastBgIndex = bgIdx;
-        this.lastBgRepeat = bgRep;
         if (!this.finaleMode) {
+            const {
+                lastItemIndex: itemIdx,
+                lastBgIndex: bgIdx,
+                lastBgRepeat: bgRep
+            } = ReadLevelAndGenerate(this, this.lastItemIndex, this.lastBgIndex, this.lastBgRepeat);
+            this.lastItemIndex = itemIdx;
+            this.lastBgIndex = bgIdx;
+            this.lastBgRepeat = bgRep;
             this.objects.forEach(object => {
                 object.update(delta, elapsed);
             })

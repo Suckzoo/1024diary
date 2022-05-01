@@ -9,21 +9,18 @@ import { PopupObject } from "../../gameobject/UI/PopupObject";
 import { TextObject } from "../../gameobject/TextObject";
 import { BackgroundHelperObject } from "../../gameobject/BackgroundHelperObject";
 
-function setTexture(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
-    btn.texture = btn.texturesOnEvent[eventType];
-}
 function playGame(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
     sound.play('pickup_sound');
-    btn.texture = btn.texturesOnEvent[eventType];
     GameInstance().play();
 }
-function showLicenseInformation(scene: MainScene) {
+function showLicenseInformation(scene: MainScene, btn: ButtonObject) {
+    sound.play('pickup_sound');
     const popup = new PopupObject(
         'license',
         (container: PopupObject) => {
             const licenseText = new TextObject(
                 100,
-                50,
+                100,
                 'licenseText',
                 `라이센스 정보
 
@@ -43,13 +40,14 @@ Get more resources at ansimuz.com, Spread the word!
                 `,
                 new PIXI.TextStyle({
                     fontFamily: 'neodgm',
-                    fontSize: 20
+                    fontSize: "2.5vh"
                 })
             )
             container.add(licenseText);
         },
         () => {
             scene.removeById('license');
+            btn.enable();
         }
     ) 
     scene.add(popup);
@@ -65,34 +63,35 @@ export class MainScene extends AbstractScene {
             const helper = new BackgroundHelperObject(`bg1-${i}`, 800 - 48 * (i + 1), 0, 48, 500, 0, -10000, GameInstance().resources['bg1'].texture);
             this.add(helper);
         }
-        const logo = new UISpriteObject('logo', 150, 100, 500, 150, GameInstance().resources['logo'].texture);
+        const logo = new UISpriteObject('logo', 36, 82, 727, 336, GameInstance().resources['logo'].texture);
         this.add(logo);
         const playButtonTextures: TexturesOnEvent = {
-            onUp: GameInstance().resources['play'].texture,
-            cancel: GameInstance().resources['play'].texture,
-            onHover: GameInstance().resources['play_hover'].texture,
-            onDown: GameInstance().resources['play_hover'].texture
+            onUp: GameInstance().resources['ui-button-start'].texture,
+            cancel: GameInstance().resources['ui-button-start'].texture,
+            onHover: GameInstance().resources['ui-button-start'].texture,
+            onDown: GameInstance().resources['ui-button-start'].texture,
         }
-        const playButton = new ButtonObject('playButton', 245, 300, 310, 75, playButtonTextures, {
+        const playButton = new ButtonObject('playButton', 0, 500, 800, 100, playButtonTextures, {
             onUp: playGame,
-            cancel: setTexture,
-            onHover: setTexture,
-            onDown: setTexture
+            cancel: () => {},
+            onHover: () => {},
+            onDown: () => {}
         });
         this.add(playButton);
         const licenseButtonTextures: TexturesOnEvent = {
-            onUp: GameInstance().resources['ccj'].texture,
-            cancel: GameInstance().resources['ccj'].texture,
-            onHover: GameInstance().resources['ccj_hover'].texture,
-            onDown: GameInstance().resources['ccj_hover'].texture,
+            onUp: GameInstance().resources['ui-button-license'].texture,
+            cancel: GameInstance().resources['ui-button-license'].texture,
+            onHover: GameInstance().resources['ui-button-license'].texture,
+            onDown: GameInstance().resources['ui-button-license'].texture,
         }
-        const licenseButton = new ButtonObject('licenseButton', 405, 470, 150, 75, licenseButtonTextures, {
+        const licenseButton = new ButtonObject('licenseButton', 632, 0, 148, 85, licenseButtonTextures, {
             onUp: () => {
-                showLicenseInformation(this)
+                licenseButton.disable();
+                showLicenseInformation(this, licenseButton)
             },
-            cancel: setTexture,
-            onHover: setTexture,
-            onDown: setTexture
+            cancel: () => {},
+            onHover: () => {},
+            onDown: () => {}
         });
         this.add(licenseButton);
     }

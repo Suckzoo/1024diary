@@ -23,6 +23,8 @@ export interface ObjectSequence {
     textureKey?: string,
     itemType: ObjectTypeKey,
     itemKey?: string,
+    rewardTextureKey?: string,
+    rewardText?: string
 };
 
 export interface Sequence {
@@ -70,7 +72,9 @@ function LevelSequence() {
                 "x": 1500,
                 "y": 300.0,
                 "itemType": "item",
-                "itemKey": "macbook"
+                "itemKey": "macbook",
+                "rewardTextureKey": "picture-frame-mock",
+                "rewardText": "링고링고링"
             },
             {
                 "x": 2431,
@@ -143,37 +147,49 @@ function LevelSequence() {
                 "x": 3000,
                 "y": 300.0,
                 "itemType": "item",
-                "itemKey": "lingo"
+                "itemKey": "lingo",
+                "rewardTextureKey": "picture-frame-mock",
+                "rewardText": "링고링고링"
             },
             {
                 "x": 4500,
                 "y": 300.0,
                 "itemType": "item",
-                "itemKey": "ring"
+                "itemKey": "ring",
+                "rewardTextureKey": "picture-frame-mock",
+                "rewardText": "티파티파니"
             },
             {
                 "x": 4700,
                 "y": 300.0,
                 "itemType": "item",
-                "itemKey": "music"
+                "itemKey": "music",
+                "rewardTextureKey": "picture-frame-mock",
+                "rewardText": "크레이지셔플"
             },
             {
                 "x": 4900,
                 "y": 300.0,
                 "itemType": "item",
-                "itemKey": "taiko"
+                "itemKey": "taiko",
+                "rewardTextureKey": "picture-frame-mock",
+                "rewardText": "혐듬겜극혐"
             },
             {
                 "x": 5100,
                 "y": 300.0,
                 "itemType": "item",
-                "itemKey": "cat"
+                "itemKey": "cat",
+                "rewardTextureKey": "picture-frame-mock",
+                "rewardText": "고양고양이"
             },
             {
                 "x": 7247,
                 "y": 300.0,
                 "itemType": "item",
-                "itemKey": "sushi"
+                "itemKey": "sushi",
+                "rewardTextureKey": "picture-frame-mock",
+                "rewardText": "카메존맛"
             },
             {
                 "x": 8101,

@@ -17,20 +17,7 @@ import * as BG_STAGE4 from './bg4-bg.png';
 import * as BG_STAGE4_BGFLOWERS from './bg4-bgflowers.png';
 import * as BG_FINAL from './bg-final.png';
 import * as BG4_CLOUD from './bg4-cloud.png';
-import * as BG4_FLOWERTILE from './bg4-flowertile.png';
 import * as LOGO_TEXTURE from './logo.png';
-import * as PLAY_TEXTURE from './play.png';
-import * as PLAY_HOVER_TEXTURE from './play_hover.png';
-import * as GALLERY_TEXTURE from './gallery.png';
-import * as GALLERY_HOVER_TEXTURE from './gallery_hover.png';
-import * as CCJ_TEXTURE from './ccj.png';
-import * as CCJ_HOVER_TEXTURE from './ccj_hover.png';
-import * as BACK_TEXTURE from './back.png';
-import * as PHOTO_TEXTURE from './photo.png';
-import * as SECRETPHOTO_TEXTURE from './secretphoto.png';
-import * as WOW_PICTURE from './wow.png';
-import * as LOCK_PICTURE from './lock.png';
-import * as X_TEXTURE from './x.png';
 import * as CHAR_SUCKZOO_1 from './char-1.png';
 import * as CHAR_SUCKZOO_2 from './char-2.png';
 import * as CHAR_SUCKZOO_3 from './char-3.png';
@@ -50,6 +37,13 @@ import * as ITEM_TAIKO from './item-taiko-1.png';
 import * as ITEM_TAIKO_GLOW from './item-taiko-2.png';
 import * as ITEM_CAT from './item-cat-1.png';
 import * as ITEM_CAT_GLOW from './item-cat-2.png';
+import * as UI_BUTTON_CLOSE from './ui-button-close.png';
+import * as UI_BUTTON_JUMP from './ui-button-jump.png';
+import * as UI_BUTTON_JUMP_PRESSED from './ui-button-jump-pressed.png';
+import * as UI_BUTTON_START from './ui-button-start.png';
+import * as UI_BUTTON_LICENSE from './ui-button-license.png';
+import * as UI_POPUP from './ui-popup.png';
+import * as PICTURE_FRAME_MOCK from './picture-frame-mock.png';
 import * as PICKUP_SOUND from './pickup.wav';
 import * as JUMP_SOUND from './jump.wav';
 import * as LASER_SOUND from './laser.wav';
@@ -83,18 +77,6 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('character4', CHAR_SUCKZOO_4)
         .add('character-stand', CHAR_SUCKZOO_STAND)
         .add('logo', LOGO_TEXTURE)
-        .add('play', PLAY_TEXTURE)
-        .add('play_hover', PLAY_HOVER_TEXTURE)
-        .add('gallery', GALLERY_TEXTURE)
-        .add('gallery_hover', GALLERY_HOVER_TEXTURE)
-        .add('ccj', CCJ_TEXTURE)
-        .add('ccj_hover', CCJ_HOVER_TEXTURE)
-        .add('back', BACK_TEXTURE)
-        .add('photo', PHOTO_TEXTURE)
-        .add('secretphoto', SECRETPHOTO_TEXTURE)
-        .add('wow', WOW_PICTURE)
-        .add('lock', LOCK_PICTURE)
-        .add('x', X_TEXTURE)
         .add('macbook', ITEM_MACBOOK)
         .add('macbook-glow', ITEM_MACBOOK_GLOW)
         .add('lingo', ITEM_LINGO)
@@ -109,6 +91,13 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('taiko-glow', ITEM_TAIKO_GLOW)
         .add('cat', ITEM_CAT)
         .add('cat-glow', ITEM_CAT_GLOW)
+        .add('ui-button-close', UI_BUTTON_CLOSE)
+        .add('ui-button-jump', UI_BUTTON_JUMP)
+        .add('ui-button-jump-pressed', UI_BUTTON_JUMP_PRESSED)
+        .add('ui-button-start', UI_BUTTON_START)
+        .add('ui-button-license', UI_BUTTON_LICENSE)
+        .add('ui-popup', UI_POPUP)
+        .add('picture-frame-mock', PICTURE_FRAME_MOCK)
         .add('pickup_sound', PICKUP_SOUND)
         .add('laser_sound', LASER_SOUND)
         .add('jump_sound', JUMP_SOUND)

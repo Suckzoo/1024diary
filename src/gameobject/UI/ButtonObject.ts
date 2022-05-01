@@ -24,8 +24,7 @@ export class ButtonObject extends UISpriteObject {
         super(id, initialX, initialY, width, height, texturesOnEvent.onUp);
         this.texturesOnEvent = texturesOnEvent;
         this.callbacksOnEvent = callbacksOnEvent;
-        this.sprite.buttonMode = true;
-        this.sprite.interactive = true;
+        this.enable();
         this.sprite
             // set the mousedown and touchstart callback...
             .on('mousedown', this.decorate('onDown'))
@@ -44,8 +43,20 @@ export class ButtonObject extends UISpriteObject {
             .on('mouseout', this.decorate('cancel'))
         this.sprite.zIndex = 10000;
     }
+    disable(): void {
+        this.sprite.buttonMode = false;
+        this.sprite.interactive = false;
+    }
+    enable(): void {
+        this.sprite.buttonMode = true;
+        this.sprite.interactive = true;
+    }
+    invoke(fnKey: keyof CallbacksOnEvent, e: any) {
+        this.decorate(fnKey)(e);
+    }
     decorate(fnKey: keyof CallbacksOnEvent): (e: any) => void {
         return (e: any) => {
+            this.texture = this.texturesOnEvent[fnKey];
             const fn = this.callbacksOnEvent[fnKey];
             fn(this, fnKey, e);
         }

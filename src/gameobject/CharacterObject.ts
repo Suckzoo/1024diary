@@ -1,6 +1,5 @@
 import * as PIXI from "pixi.js";
 import { sound } from '@pixi/sound';
-import { KeyDownHandler } from "../eventhandlers/KeyDownHandler";
 import { GameInstance } from "../game";
 import { AABBCollidableObject } from "./AABBCollidableObject";
 
@@ -51,13 +50,11 @@ export class CharacterObject extends AABBCollidableObject {
         this.status = 'onGround';
         this.finalJump = false;
         this.jumpPrevented = false;
-        this.registerEventHandlers();
     }
     stringify(): string {
         return 'character';
     }
     preventJump(): void {
-        console.log("Finale mode: jump prevented");
         this.jumpPrevented = true;
     }
     jump(force: boolean = false): void {
@@ -138,10 +135,5 @@ export class CharacterObject extends AABBCollidableObject {
             this.status = 'onGround';
             this.y = GROUND_Y;
         }
-    }
-    registerEventHandlers(): void {
-        KeyDownHandler.add(' ', () => {
-            this.jump()
-        });
     }
 }

@@ -95,27 +95,29 @@ function spawnObjects(
     while (lastItemIndex < objSeq.length && objSeq[lastItemIndex].x - X < 850) {
         const initX = objSeq[lastItemIndex].x - X;
         if (objSeq[lastItemIndex].itemType === 'item') {
-            const key: string = objSeq[lastItemIndex]['itemKey']!
+            const key: string = objSeq[lastItemIndex].itemKey!
+            const rewardTextureKey: string = objSeq[lastItemIndex].rewardTextureKey!;
+            const rewardText: string = objSeq[lastItemIndex].rewardText!;
             const v = objSeq[lastItemIndex].v || BACKGROUND_VELOCITY;
             const alt = objSeq[lastItemIndex].y;
             const coin = ItemObject.spawn(initX, alt, v, ItemTextures[key]);
             coin.hits(character, (coin, _character) => {
-                scene.character.freeze();
+                scene.freeze();
                 scene.remove(coin);
                 sound.play('pickup_sound')
                 const popup = new PopupObject(
                     `preview-secret-${key}`,
                     (container: PopupObject) => {
-                        const pictureObj = new UISpriteObject(`${container.id}#pics`, 100, 100, 600, 400, GameInstance().resources['wow'].texture);
+                        const pictureObj = new UISpriteObject(`${container.id}#pics`, 70, 100, 660, 340, GameInstance().resources[rewardTextureKey].texture);
                         container.add(pictureObj);
-                        const descriptionObj = new TextObject(100, 550, `${container.id}#description`, '와우! 예아!', new PIXI.TextStyle({
+                        const descriptionObj = new TextObject(70, 470, `${container.id}#description`, rewardText, new PIXI.TextStyle({
                             fontFamily: 'neodgm',
-                            fontSize: 20
+                            fontSize: "3.5vh"
                         }));
                         container.add(descriptionObj);
                     },
                     () => {
-                        scene.character.unfreeze();
+                        scene.unfreeze();
                         scene.removeById(`preview-secret-${key}`);
                         scene.app.resumeTimer();
                     }
@@ -175,7 +177,7 @@ export function ReadLevelAndGenerate(
 ): {
     lastItemIndex: number,
     lastBgIndex: number,
-    lastBgRepeat: number
+    lastBgRepeat: number,
 } {
     const bgSeq = Level.backgroundSequence;
     const objSeq = Level.objectSequence as unknown as ObjectSequence[];
@@ -186,9 +188,6 @@ export function ReadLevelAndGenerate(
         lastBgRepeat
     )
     disposeOldBackgroundFragments(scene);
-    if (isGameFinished(scene)) {
-        scene.startFinale();
-    }
     if (lastItemIndex < objSeq.length) {
         lastItemIndex = spawnObjects(
             scene,
@@ -196,9 +195,12 @@ export function ReadLevelAndGenerate(
             lastItemIndex
         )
     } 
+    if (isGameFinished(scene)) {
+        scene.startFinale();
+    }
     return {
         lastItemIndex,
         lastBgIndex: idx,
-        lastBgRepeat: rep
+        lastBgRepeat: rep,
     }
 }

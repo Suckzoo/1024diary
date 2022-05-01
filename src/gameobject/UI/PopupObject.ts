@@ -1,7 +1,6 @@
 import * as PIXI from "pixi.js";
 import { GameInstance } from "../../game";
 import { ContainerGameObject } from "../ContainerGameObject";
-import { TextObject } from "../TextObject";
 import { ButtonObject, TexturesOnEvent } from "./ButtonObject";
 import { UISpriteObject } from "./UISpriteObject";
 
@@ -19,10 +18,16 @@ export class PopupObject extends ContainerGameObject {
         super();
         this.closeCallback = cb;
         this.container = new PIXI.Container();
-        const graphics = new PIXI.Graphics();
-        graphics.beginFill(0xFFFFFF);
-        graphics.drawRect(0, 0, GameInstance().width, GameInstance().height);
-        graphics.endFill();
+        const panel = new UISpriteObject(
+            'panel',
+            0,
+            0,
+            800,
+            600,
+            GameInstance().resources['ui-popup'].texture
+        )
+        this.add(panel);
+        this.container.zIndex = 10001;
         const interval = setInterval(() => {
             if (this.width < 800) {
                 this.width += INITIAL_WIDTH;
@@ -36,12 +41,12 @@ export class PopupObject extends ContainerGameObject {
                 this.x = 0;
                 this.y = 0;
                 const closeButtonTextures: TexturesOnEvent = {
-                    onUp: GameInstance().resources['x'].texture,
-                    cancel: GameInstance().resources['x'].texture,
-                    onHover: GameInstance().resources['x'].texture,
-                    onDown: GameInstance().resources['x'].texture,
+                    onUp: GameInstance().resources['ui-button-close'].texture,
+                    cancel: GameInstance().resources['ui-button-close'].texture,
+                    onHover: GameInstance().resources['ui-button-close'].texture,
+                    onDown: GameInstance().resources['ui-button-close'].texture,
                 }
-                const closeButton = new ButtonObject(`${id}#close`, 750, 0, 50, 50, closeButtonTextures, {
+                const closeButton = new ButtonObject(`${id}#close`, 710, 45, 45, 45, closeButtonTextures, {
                     onUp: () => { this.closeCallback() },
                     cancel: () => { },
                     onDown: () => { },
@@ -51,7 +56,6 @@ export class PopupObject extends ContainerGameObject {
                 addComponentCb(this);
             }
         }, 10);
-        this.container.addChild(graphics);
         
         this.x = 392;
         this.y = 294;
