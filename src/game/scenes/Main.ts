@@ -40,7 +40,7 @@ Get more resources at ansimuz.com, Spread the word!
                 `,
                 new PIXI.TextStyle({
                     fontFamily: 'neodgm',
-                    fontSize: "2.5vh"
+                    fontSize: "2.5vmin"
                 })
             )
             container.add(licenseText);

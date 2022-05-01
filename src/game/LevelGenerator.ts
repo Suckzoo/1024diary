@@ -112,7 +112,7 @@ function spawnObjects(
                         container.add(pictureObj);
                         const descriptionObj = new TextObject(70, 470, `${container.id}#description`, rewardText, new PIXI.TextStyle({
                             fontFamily: 'neodgm',
-                            fontSize: "3.5vh"
+                            fontSize: "3.5vmin"
                         }));
                         container.add(descriptionObj);
                     },
