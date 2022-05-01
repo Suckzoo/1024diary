@@ -45,6 +45,9 @@ export abstract class SpriteGameObject extends GameObject {
         this.sprite.height = height / 600 * GameInstance().height;
     }
     onScreenResize(prevWidth: number, prevHeight: number): void {
+        if (this.id === 'panel') {
+            console.log("I'm listening: panel")
+        }
         this.x = this.x / prevWidth * GameInstance().width;
         this.y = this.y / prevHeight * GameInstance().height;
         this.width = this.width / prevWidth * GameInstance().width;

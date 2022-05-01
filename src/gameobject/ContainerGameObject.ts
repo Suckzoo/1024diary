@@ -57,8 +57,11 @@ export abstract class ContainerGameObject extends GameObject {
     onScreenResize(prevWidth: number, prevHeight: number): void {
         this.x = this.x / prevWidth * GameInstance().width;
         this.y = this.y / prevHeight * GameInstance().height;
-        this.width = this.width / prevWidth * GameInstance().width;
-        this.height = this.height / prevHeight * GameInstance().height;
+        // this.width = this.width / prevWidth * GameInstance().width;
+        // this.height = this.height / prevHeight * GameInstance().height;
+        this.map.forEach((obj: GameObject) => {
+            obj.onScreenResize(prevWidth, prevHeight);
+        })
     }
     get rotation() {
         return this.container.rotation;

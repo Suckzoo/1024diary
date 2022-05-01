@@ -17,6 +17,7 @@ const GRAVITY = 0.5;
 const FINALE_X_SPEED = 1.5;
 
 export class CharacterObject extends AABBCollidableObject {
+    id: string;
     sprite: PIXI.AnimatedSprite
     refTime: number;
     frozenTime: number;
@@ -29,6 +30,7 @@ export class CharacterObject extends AABBCollidableObject {
     jumpPrevented: boolean;
     constructor() {
         super();
+        this.id = 'character';
         this.sprite = new PIXI.AnimatedSprite([
             GameInstance().resources['character1'].texture,
             GameInstance().resources['character2'].texture,

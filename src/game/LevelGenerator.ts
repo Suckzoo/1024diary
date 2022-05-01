@@ -110,10 +110,7 @@ function spawnObjects(
                     (container: PopupObject) => {
                         const pictureObj = new UISpriteObject(`${container.id}#pics`, 70, 100, 660, 340, GameInstance().resources[rewardTextureKey].texture);
                         container.add(pictureObj);
-                        const descriptionObj = new TextObject(70, 470, `${container.id}#description`, rewardText, new PIXI.TextStyle({
-                            fontFamily: 'neodgm',
-                            fontSize: "3.5vmin"
-                        }));
+                        const descriptionObj = new TextObject(70, 470, 660, `${container.id}#description`, rewardText, 21);
                         container.add(descriptionObj);
                     },
                     () => {

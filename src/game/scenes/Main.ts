@@ -19,8 +19,9 @@ function showLicenseInformation(scene: MainScene, btn: ButtonObject) {
         'license',
         (container: PopupObject) => {
             const licenseText = new TextObject(
-                100,
-                100,
+                70,
+                70,
+                660,
                 'licenseText',
                 `라이센스 정보
 
@@ -38,10 +39,7 @@ even for commercial purposes, all without asking permission:
 http://creativecommons.org/publicdomain/zero/1.0/
 Get more resources at ansimuz.com, Spread the word!
                 `,
-                new PIXI.TextStyle({
-                    fontFamily: 'neodgm',
-                    fontSize: "2.5vmin"
-                })
+                15
             )
             container.add(licenseText);
         },
