@@ -8,6 +8,7 @@ import { AbstractScene } from "./Scene";
 import { PopupObject } from "../../gameobject/UI/PopupObject";
 import { TextObject } from "../../gameobject/TextObject";
 import { BackgroundHelperObject } from "../../gameobject/BackgroundHelperObject";
+import { MixedParticleShowerSystem } from "../../gameobject/ParticleShowerSystem";
 
 function playGame(btn: ButtonObject, eventType: keyof CallbacksOnEvent, event: any) {
     sound.play('pickup_sound');
@@ -55,12 +56,8 @@ export class MainScene extends AbstractScene {
         super(app);
     }
     load(): void {
-        const background = new UISpriteObject('background', 0, 0, 800, 500, GameInstance().resources['bg1-init'].texture);
+        const background = new UISpriteObject('background', 0, 0, 800, 500, GameInstance().resources['graytile'].texture);
         this.add(background);
-        for(let i = 0; i < 17; i++) {
-            const helper = new BackgroundHelperObject(`bg1-${i}`, 800 - 48 * (i + 1), 0, 48, 500, 0, -10000, GameInstance().resources['bg1'].texture);
-            this.add(helper);
-        }
         const logo = new UISpriteObject('logo', 36, 82, 727, 336, GameInstance().resources['logo'].texture);
         this.add(logo);
         const playButtonTextures: TexturesOnEvent = {

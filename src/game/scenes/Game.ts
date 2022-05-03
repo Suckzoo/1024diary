@@ -8,6 +8,7 @@ import { ObjectType } from "../level";
 import { ReadLevelAndGenerate } from "../LevelGenerator";
 import { AbstractScene } from "./Scene";
 import { KeyboardEventHandler } from '../../eventhandlers/KeyboardEventHandler';
+import { MixedParticleShowerSystem } from "../../gameobject/ParticleShowerSystem";
 
 export class GameScene extends AbstractScene {
     mode: 'None' | 'Record' | 'Play' | 'RandomPlay' = 'None';
@@ -19,6 +20,8 @@ export class GameScene extends AbstractScene {
     lastBgRepeat: number;
     status: 'playing' | 'waitCharacterToFinishLifecycle' | 'endroll' | 'finished';
     jumpButton: ButtonObject;
+    particleSystem: MixedParticleShowerSystem | null = null;
+    endRollSprite: BackgroundHelperObject;
     constructor(app: PIXIApp) {
         super(app);
         this.mode = 'Play';
@@ -41,6 +44,16 @@ export class GameScene extends AbstractScene {
             onHover: () => {},
             cancel: () => {}
         });
+        this.endRollSprite = new BackgroundHelperObject(
+            'endroll',
+            212,
+            -236,
+            376,
+            236,
+            0,
+            4,
+            GameInstance().resources['ui-ending'].texture
+        )
         KeyboardEventHandler.down(' ', () => {
             this.jumpButton.invoke('onDown', null);
         })
@@ -95,6 +108,11 @@ export class GameScene extends AbstractScene {
             this.objects.forEach(object => {
                 object.update(delta, elapsed);
             })
+            this.objects.forEach(object => {
+                if (object instanceof AABBCollidableObject) {
+                    object.checkCollision(delta, elapsed);
+                }
+            })
         } else if (this.status === 'waitCharacterToFinishLifecycle') {
             this.character.updateForFinale(delta, elapsed);
             if (this.character.isLifecycleDone()) {
@@ -110,21 +128,30 @@ export class GameScene extends AbstractScene {
                     GameInstance().resources['character-stand'].texture
                 )
                 this.add(charStand);
+                this.add(this.endRollSprite);
                 this.status = 'endroll';
             }
         } else if (this.status === 'endroll') {
+            if (this.endRollSprite.y < 80) {
+                this.endRollSprite.y += delta * 1.5;
+                if (this.endRollSprite.y > 80) {
+                    this.endRollSprite.y = 80;
+                    this.particleSystem = new MixedParticleShowerSystem(
+                        this,
+                        elapsed
+                    );
+                    this.status = 'finished';
+                }
+            }
             //TODO
         } else {
             // this.status === finished
             // do nothing
+            this.particleSystem.update(delta, elapsed);
         }
         this.container.children.sort((a, b) => {
             return (a.zIndex || 0) - (b.zIndex || 0);
         })
-        this.objects.forEach(object => {
-            if (object instanceof AABBCollidableObject) {
-                object.checkCollision(delta, elapsed);
-            }
-        })
+        
     }
 }

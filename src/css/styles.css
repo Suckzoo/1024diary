@@ -1,5 +1,6 @@
 html {
-  background-color: #000;
+  background-image: url("../assets/ui-bg-pattern.png");
+  background-repeat: repeat;
 }
 @font-face {
   font-family: neodgm;

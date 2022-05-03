@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 
-import * as BACKGROUND_IMAGE from './background.jpg';
+import * as GRAYTILE_IMAGE from './graytile.png';
 import * as BG_INIT_STAGE1 from './bg1-obj-stage2.png';
 import * as BG_STAGE1 from './bg1.png';
 import * as BG_STAGE1_WINDOW from './bg1-obj-window.png';
@@ -23,6 +23,8 @@ import * as CHAR_SUCKZOO_2 from './char-2.png';
 import * as CHAR_SUCKZOO_3 from './char-3.png';
 import * as CHAR_SUCKZOO_4 from './char-4.png';
 import * as CHAR_SUCKZOO_STAND from './char-stand.png';
+import * as ITEM_1024 from './item-1024-1.png';
+import * as ITEM_1024_GLOW from './item-1024-2.png';
 import * as ITEM_MACBOOK from './item-macbook-1.png';
 import * as ITEM_MACBOOK_GLOW from './item-macbook-2.png';
 import * as ITEM_LINGO from './item-lingo-1.png';
@@ -33,6 +35,8 @@ import * as ITEM_MUSIC from './item-music-1.png';
 import * as ITEM_MUSIC_GLOW from './item-music-2.png';
 import * as ITEM_SUSHI from './item-sushi-1.png';
 import * as ITEM_SUSHI_GLOW from './item-sushi-2.png';
+import * as ITEM_KOUSEI from './item-kousei-1.png';
+import * as ITEM_KOUSEI_GLOW from './item-kousei-2.png';
 import * as ITEM_TAIKO from './item-taiko-1.png';
 import * as ITEM_TAIKO_GLOW from './item-taiko-2.png';
 import * as ITEM_CAT from './item-cat-1.png';
@@ -43,7 +47,11 @@ import * as UI_BUTTON_JUMP_PRESSED from './ui-button-jump-pressed.png';
 import * as UI_BUTTON_START from './ui-button-start.png';
 import * as UI_BUTTON_LICENSE from './ui-button-license.png';
 import * as UI_POPUP from './ui-popup.png';
+import * as UI_ENDING from './ui-ending.png';
 import * as PICTURE_FRAME_MOCK from './picture-frame-mock.png';
+import * as CONFETTI_1 from './confetti-1.png';
+import * as CONFETTI_2 from './confetti-2.png';
+import * as CONFETTI_3 from './confetti-3.png';
 import * as PICKUP_SOUND from './pickup.wav';
 import * as JUMP_SOUND from './jump.wav';
 import * as LASER_SOUND from './laser.wav';
@@ -54,7 +62,7 @@ interface LoaderAndResources {
 }
 export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
     loader
-        .add('background', BACKGROUND_IMAGE)
+        .add('graytile', GRAYTILE_IMAGE)
         .add('bg1-init', BG_INIT_STAGE1)
         .add('bg1', BG_STAGE1)
         .add('bg1-window', BG_STAGE1_WINDOW)
@@ -77,6 +85,8 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('character4', CHAR_SUCKZOO_4)
         .add('character-stand', CHAR_SUCKZOO_STAND)
         .add('logo', LOGO_TEXTURE)
+        .add('1024', ITEM_1024)
+        .add('1024-glow', ITEM_1024_GLOW)
         .add('macbook', ITEM_MACBOOK)
         .add('macbook-glow', ITEM_MACBOOK_GLOW)
         .add('lingo', ITEM_LINGO)
@@ -87,6 +97,8 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('music-glow', ITEM_MUSIC_GLOW)
         .add('sushi', ITEM_SUSHI)
         .add('sushi-glow', ITEM_SUSHI_GLOW)
+        .add('kousei', ITEM_KOUSEI)
+        .add('kousei-glow', ITEM_KOUSEI_GLOW)
         .add('taiko', ITEM_TAIKO)
         .add('taiko-glow', ITEM_TAIKO_GLOW)
         .add('cat', ITEM_CAT)
@@ -97,7 +109,11 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('ui-button-start', UI_BUTTON_START)
         .add('ui-button-license', UI_BUTTON_LICENSE)
         .add('ui-popup', UI_POPUP)
+        .add('ui-ending', UI_ENDING)
         .add('picture-frame-mock', PICTURE_FRAME_MOCK)
+        .add('confetti-1', CONFETTI_1)
+        .add('confetti-2', CONFETTI_2)
+        .add('confetti-3', CONFETTI_3)
         .add('pickup_sound', PICKUP_SOUND)
         .add('laser_sound', LASER_SOUND)
         .add('jump_sound', JUMP_SOUND)
