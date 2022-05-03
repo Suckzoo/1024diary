@@ -71,7 +71,6 @@ export class MixedParticleShowerSystem {
         });
     }
     update(delta: number, elapsed: number) {
-        console.log(`${elapsed}, ${this.lastFeedingTime}`);
         if (elapsed - this.lastFeedingTime > 100) {
             this.feed();
             this.lastFeedingTime = elapsed;
