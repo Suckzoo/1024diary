@@ -40,7 +40,7 @@ function LevelSequence() {
             {
                 "bgKey": "graytile",
                 "repeat": 1,
-                "width": 1200,
+                "width": 1500,
                 "level": 1
             },
             {
@@ -81,7 +81,7 @@ function LevelSequence() {
             },
             {
                 "bgKey": "bg4-bg",
-                "repeat": 1000,
+                "repeat": 1600,
                 "width": 14,
                 "level": 5
             }
@@ -203,12 +203,12 @@ function LevelSequence() {
             "v": 4.8
         },
         {
-            "x": offset[0] + 1000,
+            "x": offset[0] + 800,
             "y": 300.0,
             "itemType": "item",
             "itemKey": "1024",
             "rewardTextureKey": "picture-1024",
-            "rewardText": "2022년 5월 5일은 저희가 만난 지 1024일이 되는 날이자, 결혼을 17일 앞둔 날입니다. 이를 기념해서, 지금까지의 우리의 여정을 되돌아 보았어요."
+            "rewardText": "2022년 5월 5일은 저희가 만난 지 1024일이 되는 날이자, 결혼을 17일 앞둔 날입니다.\n이를 기념해서 지금까지 우리의 여정을 되돌아 보았어요."
         },
         {
             "x": offset[0] + 2535,
@@ -216,7 +216,7 @@ function LevelSequence() {
             "itemType": "item",
             "itemKey": "macbook",
             "rewardTextureKey": "picture-mac",
-            "rewardText": "저희는 알고리즘 공부를 함께 하며 본격적으로 친해지게 되었어요."
+            "rewardText": "저희는 알고리즘 스터디에서 함께 어려운 문제들을 풀어나가며 처음으로 친해지게 되었습니다."
         },
         {
             "x": offset[1] + 650,
@@ -224,35 +224,35 @@ function LevelSequence() {
             "itemType": "item",
             "itemKey": "lingo",
             "rewardTextureKey": "picture-lingo",
-            "rewardText": "그리고, 본격적으로 사귀게 되었습니다!"
+            "rewardText": "그러다가 자주 가던 펍에서 서로의 마음을 확인했고,\n함께로서의 1일을 시작하게 되었어요."
         },
         {
-            "x": offset[2] + 700,
-            "y": 300.0,
+            "x": offset[2] + 500,
+            "y": 230.0,
             "itemType": "item",
             "itemKey": "music",
             "rewardTextureKey": "picture-music",
-            "rewardText": "저희는 비슷한 점이 많았어요! 좋아하는 음악도 비슷해서 함께 공연도 보러 다니고"
+            "rewardText": "저희는 비슷한 점이 많았어요! \n음악 취향도 비슷해서 함께 이런저런 공연을 보러 다니기도 했죠."
         },
         {
-            "x": offset[2] + 1300,
-            "y": 300.0,
+            "x": offset[2] + 1600,
+            "y": 160.0,
             "itemType": "item",
             "itemKey": "taiko",
             "rewardTextureKey": "picture-taiko",
-            "rewardText": "리듬게임을 좋아한다는 점도 닮아서, 집에서도 게임을 하곤 합니다."
+            "rewardText": "리듬게임을 좋아한다는 점도 비슷해서, \n이런저런 컨트롤러를 구매해서 집에서 함께 게임을 하곤 합니다."
         },
         {
             "x": offset[3] + 450,
-            "y": 300.0,
+            "y": 310.0,
             "itemType": "item",
             "itemKey": "sushi",
             "rewardTextureKey": "picture-sushi",
-            "rewardText": "함께 맛있는 것을 먹으러 다니기도 하고"
+            "rewardText": "함께 맛있는 것을 먹으러 다니기도 하고,"
         },
         {
             "x": offset[3] + 1200,
-            "y": 300.0,
+            "y": 310.0,
             "itemType": "item",
             "itemKey": "kousei",
             "rewardTextureKey": "picture-kousei",
@@ -260,22 +260,28 @@ function LevelSequence() {
         },
         {
             "x": offset[4] + 800,
+            "y": 180.0,
+            "itemType": "item",
+            "itemKey": "ring",
+            "rewardTextureKey": "picture-ring",
+            "rewardText": "그리고 512일이 되던 때, \n앞으로 평생 함께하기로 약속했답니다."
+        },
+        {
+            "x": offset[4] + 1500,
             "y": 300.0,
             "itemType": "item",
             "itemKey": "cat",
             "rewardTextureKey": "picture-cat",
-            "rewardText": "각각 고양이 1마리의 집사였던 우리들이 만나, 이제 고양이 2마리의 집사가 되려고 합니다."
+            "rewardText": "각각 고양이 1마리의 집사였던 우리들이 만나, \n이제 고양이 2마리의 집사가 되려고 합니다."
         },
         {
-            "x": offset[4] + 1600,
+            "x": offset[4] + 2300,
             "y": 300.0,
             "itemType": "item",
-            "itemKey": "ring",
-            "rewardTextureKey": "picture-ring",
-            "rewardText": "2022년 5월 22일 결혼합니다! 앞으로의 여정을 많이 축복해 주세요!"
+            "itemKey": "heart",
+            "rewardTextureKey": "picture-heart",
+            "rewardText": "2022년 5월 22일, 결혼합니다! \n저희에게 펼쳐진 앞으로의 여정을 많이 축복해 주세요. 감사합니다!"
         },
-        
-        
     ]
     //generator for stage 4
     level.objectSequence.push()

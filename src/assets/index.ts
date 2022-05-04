@@ -37,10 +37,12 @@ import * as ITEM_SUSHI from './item-sushi-1.png';
 import * as ITEM_SUSHI_GLOW from './item-sushi-2.png';
 import * as ITEM_KOUSEI from './item-kousei-1.png';
 import * as ITEM_KOUSEI_GLOW from './item-kousei-2.png';
-import * as ITEM_TAIKO from './item-taiko-1.png';
+import * as ITEM_TAIKO  from './item-taiko-1.png';
 import * as ITEM_TAIKO_GLOW from './item-taiko-2.png';
 import * as ITEM_CAT from './item-cat-1.png';
 import * as ITEM_CAT_GLOW from './item-cat-2.png';
+import * as ITEM_HEART from './item-heart-1.png';
+import * as ITEM_HEART_GLOW from './item-heart-2.png';
 import * as UI_BUTTON_CLOSE from './ui-button-close.png';
 import * as UI_BUTTON_JUMP from './ui-button-jump.png';
 import * as UI_BUTTON_JUMP_PRESSED from './ui-button-jump-pressed.png';
@@ -57,6 +59,7 @@ import * as PICTURE_SUSHI from './pic-sushi.png';
 import * as PICTURE_KOUSEI from './pic-kousei.png';
 import * as PICTURE_CAT from './pic-cat.png';
 import * as PICTURE_RING from './pic-ring.png';
+import * as PICTURE_HEART from './pic-heart.png';
 import * as CONFETTI_1 from './confetti-1.png';
 import * as CONFETTI_2 from './confetti-2.png';
 import * as CONFETTI_3 from './confetti-3.png';
@@ -111,6 +114,8 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('taiko-glow', ITEM_TAIKO_GLOW)
         .add('cat', ITEM_CAT)
         .add('cat-glow', ITEM_CAT_GLOW)
+        .add('heart', ITEM_HEART)
+        .add('heart-glow', ITEM_HEART_GLOW)
         .add('ui-button-close', UI_BUTTON_CLOSE)
         .add('ui-button-jump', UI_BUTTON_JUMP)
         .add('ui-button-jump-pressed', UI_BUTTON_JUMP_PRESSED)
@@ -127,6 +132,7 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('picture-kousei', PICTURE_KOUSEI)
         .add('picture-cat', PICTURE_CAT)
         .add('picture-ring', PICTURE_RING)
+        .add('picture-heart', PICTURE_HEART)
         .add('confetti-1', CONFETTI_1)
         .add('confetti-2', CONFETTI_2)
         .add('confetti-3', CONFETTI_3)
