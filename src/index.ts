@@ -23,6 +23,7 @@ function getProperViewportSize(): ViewportSize {
 }
 
 function runGame() {
+    alert(1);
     const {width, height} = getProperViewportSize();
     const game = GameInstance(document.getElementById("container"), width, height);
     game.run();

@@ -130,16 +130,17 @@ export class GameScene extends AbstractScene {
                 this.add(charStand);
                 this.add(this.endRollSprite);
                 this.status = 'endroll';
+                this.particleSystem = new MixedParticleShowerSystem(
+                    this,
+                    elapsed
+                );
             }
         } else if (this.status === 'endroll') {
+            this.particleSystem.update(delta, elapsed);
             if (this.endRollSprite.y < 80) {
                 this.endRollSprite.y += delta * 1.5;
                 if (this.endRollSprite.y > 80) {
                     this.endRollSprite.y = 80;
-                    this.particleSystem = new MixedParticleShowerSystem(
-                        this,
-                        elapsed
-                    );
                     this.status = 'finished';
                 }
             }
