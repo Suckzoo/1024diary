@@ -48,7 +48,15 @@ import * as UI_BUTTON_START from './ui-button-start.png';
 import * as UI_BUTTON_LICENSE from './ui-button-license.png';
 import * as UI_POPUP from './ui-popup.png';
 import * as UI_ENDING from './ui-ending.png';
-import * as PICTURE_FRAME_MOCK from './picture-frame-mock.png';
+import * as PICTURE_1024 from './picture-frame-mock.png';
+import * as PICTURE_MAC from './picture-frame-mock.png';
+import * as PICTURE_LINGO from './picture-frame-mock.png';
+import * as PICTURE_MUSIC from './pic-music.png';
+import * as PICTURE_TAIKO from './pic-taiko.png';
+import * as PICTURE_SUSHI from './pic-sushi.png';
+import * as PICTURE_KOUSEI from './pic-kousei.png';
+import * as PICTURE_CAT from './pic-cat.png';
+import * as PICTURE_RING from './pic-ring.png';
 import * as CONFETTI_1 from './confetti-1.png';
 import * as CONFETTI_2 from './confetti-2.png';
 import * as CONFETTI_3 from './confetti-3.png';
@@ -110,7 +118,15 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('ui-button-license', UI_BUTTON_LICENSE)
         .add('ui-popup', UI_POPUP)
         .add('ui-ending', UI_ENDING)
-        .add('picture-frame-mock', PICTURE_FRAME_MOCK)
+        .add('picture-1024', PICTURE_1024)
+        .add('picture-mac', PICTURE_MAC)
+        .add('picture-lingo', PICTURE_LINGO)
+        .add('picture-music', PICTURE_MUSIC)
+        .add('picture-taiko', PICTURE_TAIKO)
+        .add('picture-sushi', PICTURE_SUSHI)
+        .add('picture-kousei', PICTURE_KOUSEI)
+        .add('picture-cat', PICTURE_CAT)
+        .add('picture-ring', PICTURE_RING)
         .add('confetti-1', CONFETTI_1)
         .add('confetti-2', CONFETTI_2)
         .add('confetti-3', CONFETTI_3)

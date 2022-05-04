@@ -207,7 +207,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "1024",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-taiko",
             "rewardText": "2022년 5월 5일은 저희가 만난 지 1024일이 되는 날이자, 결혼을 17일 앞둔 날입니다. 이를 기념해서, 지금까지의 우리의 여정을 되돌아 보았어요."
         },
         {
@@ -215,7 +215,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "macbook",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-mac",
             "rewardText": "저희는 알고리즘 공부를 함께 하며 본격적으로 친해지게 되었어요."
         },
         {
@@ -223,7 +223,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "lingo",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-lingo",
             "rewardText": "그리고, 본격적으로 사귀게 되었습니다!"
         },
         {
@@ -231,7 +231,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "music",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-music",
             "rewardText": "저희는 비슷한 점이 많았어요! 좋아하는 음악도 비슷해서 함께 공연도 보러 다니고"
         },
         {
@@ -239,7 +239,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "taiko",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-taiko",
             "rewardText": "리듬게임을 좋아한다는 점도 닮아서, 집에서도 게임을 하곤 합니다."
         },
         {
@@ -247,7 +247,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "sushi",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-sushi",
             "rewardText": "함께 맛있는 것을 먹으러 다니기도 하고"
         },
         {
@@ -255,7 +255,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "kousei",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-kousei",
             "rewardText": "함께 맛있는 것을 만들며 시간을 보내기도 했어요."
         },
         {
@@ -263,15 +263,15 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "cat",
-            "rewardTextureKey": "picture-frame-mock",
-            "rewardText": "각각 고양이 1마리의 집사였던 우리들이 만나, 이제 고양이 2마리의 집사가 되려고 합니다. "
+            "rewardTextureKey": "picture-cat",
+            "rewardText": "각각 고양이 1마리의 집사였던 우리들이 만나, 이제 고양이 2마리의 집사가 되려고 합니다."
         },
         {
             "x": offset[4] + 1600,
             "y": 300.0,
             "itemType": "item",
             "itemKey": "ring",
-            "rewardTextureKey": "picture-frame-mock",
+            "rewardTextureKey": "picture-ring",
             "rewardText": "2022년 5월 22일 결혼합니다! 앞으로의 여정을 많이 축복해 주세요!"
         },
         

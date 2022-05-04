@@ -108,9 +108,9 @@ function spawnObjects(
                 const popup = new PopupObject(
                     `preview-secret-${key}`,
                     (container: PopupObject) => {
-                        const pictureObj = new UISpriteObject(`${container.id}#pics`, 70, 100, 660, 340, GameInstance().resources[rewardTextureKey].texture);
+                        const pictureObj = new UISpriteObject(`${container.id}#pics`, 70, 70, 660, 340, GameInstance().resources[rewardTextureKey].texture);
                         container.add(pictureObj);
-                        const descriptionObj = new TextObject(70, 470, 660, `${container.id}#description`, rewardText, 21);
+                        const descriptionObj = new TextObject(100, 450, 600, `${container.id}#description`, rewardText, 21);
                         container.add(descriptionObj);
                     },
                     () => {
