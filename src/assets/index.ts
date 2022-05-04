@@ -15,6 +15,8 @@ import * as BG_NEON4 from './bg2-neon4.png';
 import * as BG_STAGE3 from './bg3-kame.png';
 import * as BG_STAGE4 from './bg4-bg.png';
 import * as BG_STAGE4_BGFLOWERS from './bg4-bgflowers.png';
+import * as BG4_DOOR_1 from './bg4-door1.png';
+import * as BG4_DOOR_2 from './bg4-door2.png';
 import * as BG_FINAL from './bg-final.png';
 import * as BG4_CLOUD from './bg4-cloud.png';
 import * as LOGO_TEXTURE from './logo.png';
@@ -89,6 +91,8 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('bg4-bg', BG_STAGE4)
         .add('bg4-bgflowers', BG_STAGE4_BGFLOWERS)
         .add('bg4-cloud', BG4_CLOUD)
+        .add('bg4-door1', BG4_DOOR_1)
+        .add('bg4-door2', BG4_DOOR_2)
         .add('bg-final', BG_FINAL)
         .add('character1', CHAR_SUCKZOO_1)
         .add('character2', CHAR_SUCKZOO_2)

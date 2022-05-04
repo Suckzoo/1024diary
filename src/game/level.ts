@@ -174,12 +174,20 @@ function LevelSequence() {
             "zIndex": 1000,
         },
         {
-            "x": offset[4] - 122,
-            "y": 155,
+            "x": offset[4] - 100,
+            "y": 0,
             "itemType": "backgroundHelper",
-            "width": 245,
-            "height": 345,
-            "textureKey": "pot",
+            "width": 208,
+            "height": 500,
+            "textureKey": "bg4-door1",
+        },
+        {
+            "x": offset[4] - 100,
+            "y": 0,
+            "itemType": "backgroundHelper",
+            "width": 208,
+            "height": 500,
+            "textureKey": "bg4-door2",
             "zIndex": 1000
         },
         {
