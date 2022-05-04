@@ -12,6 +12,7 @@ export class TextObject extends GameObject {
         super();
         this.style = new PIXI.TextStyle({
             fontFamily: 'neodgm',
+            fill: '#382721',
         })
         this.style.wordWrap = true;
         this.width = width;
