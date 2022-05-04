@@ -50,7 +50,7 @@ import * as UI_POPUP from './ui-popup.png';
 import * as UI_ENDING from './ui-ending.png';
 import * as PICTURE_1024 from './picture-frame-mock.png';
 import * as PICTURE_MAC from './picture-frame-mock.png';
-import * as PICTURE_LINGO from './picture-frame-mock.png';
+import * as PICTURE_LINGO from './pic-lingo.png';
 import * as PICTURE_MUSIC from './pic-music.png';
 import * as PICTURE_TAIKO from './pic-taiko.png';
 import * as PICTURE_SUSHI from './pic-sushi.png';

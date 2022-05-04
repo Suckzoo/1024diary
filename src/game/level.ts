@@ -207,7 +207,7 @@ function LevelSequence() {
             "y": 300.0,
             "itemType": "item",
             "itemKey": "1024",
-            "rewardTextureKey": "picture-taiko",
+            "rewardTextureKey": "picture-1024",
             "rewardText": "2022년 5월 5일은 저희가 만난 지 1024일이 되는 날이자, 결혼을 17일 앞둔 날입니다. 이를 기념해서, 지금까지의 우리의 여정을 되돌아 보았어요."
         },
         {
