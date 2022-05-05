@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js';
 import * as GRAYTILE_IMAGE from './graytile.png';
 import * as BG_INIT_STAGE1 from './bg1-obj-stage2.png';
 import * as BG_STAGE1 from './bg1.png';
+import * as BG_STAGE1_OUTSIDE from './bg1-outside.png';
 import * as BG_STAGE1_WINDOW from './bg1-obj-window.png';
 import * as POT from './bg1-obj-pot.png';
 import * as BG_STAGE2 from './bg2.png';
@@ -78,6 +79,7 @@ export function LoadSprites(loader: PIXI.Loader): Promise<LoaderAndResources> {
         .add('graytile', GRAYTILE_IMAGE)
         .add('bg1-init', BG_INIT_STAGE1)
         .add('bg1', BG_STAGE1)
+        .add('bg1-outside', BG_STAGE1_OUTSIDE)
         .add('bg1-window', BG_STAGE1_WINDOW)
         .add('pot', POT)
         .add('bg2', BG_STAGE2)

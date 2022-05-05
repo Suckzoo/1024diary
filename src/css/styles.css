@@ -1,6 +1,7 @@
 html {
   background-image: url("../assets/ui-bg-pattern.png");
   background-repeat: repeat;
+  background-color: #29252a;
   overflow-x: hidden;
   overflow-y: hidden;
   touch-action: none;

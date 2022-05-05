@@ -107,13 +107,24 @@ function LevelSequence() {
             "zIndex": 1
         },
         {
-            "x": offset[1] - 122,
+            "x": offset[0] + 2060,
+            "y": 0,
+            "itemType": "backgroundHelper",
+            "width": 1000,
+            "height": 500,
+            "textureKey": "bg1-outside",
+            "zIndex": -10000,
+            "v": 5
+        },
+        {
+            "x": offset[1] - 60,
             "y": 155,
             "itemType": "backgroundHelper",
             "width": 245,
             "height": 345,
             "textureKey": "pot",
             "zIndex": 1000,
+            "v": 6.7
         },
         {
             "x": offset[1] + 200,
@@ -165,13 +176,14 @@ function LevelSequence() {
             "textureKey": "bg2-tot"
         },
         {
-            "x": offset[3] - 122,
+            "x": offset[3] - 60,
             "y": 155,
             "itemType": "backgroundHelper",
             "width": 245,
             "height": 345,
             "textureKey": "pot",
             "zIndex": 1000,
+            "v": 6.7
         },
         {
             "x": offset[4] - 100,
@@ -232,7 +244,7 @@ function LevelSequence() {
             "itemType": "item",
             "itemKey": "lingo",
             "rewardTextureKey": "picture-lingo",
-            "rewardText": "그러다가 자주 가던 펍에서 서로의 마음을 확인했고,\n함께로서의 1일을 시작하게 되었어요."
+            "rewardText": "그러다 같이 가곤 하던 펍에서 서로의 마음을 확인했고,\n함께로서의 1일을 시작하게 되었어요."
         },
         {
             "x": offset[2] + 500,
@@ -248,7 +260,7 @@ function LevelSequence() {
             "itemType": "item",
             "itemKey": "taiko",
             "rewardTextureKey": "picture-taiko",
-            "rewardText": "리듬게임을 좋아한다는 점도 비슷해서, \n이런저런 컨트롤러를 구매해서 집에서 함께 게임을 하곤 합니다."
+            "rewardText": "리듬게임을 좋아한다는 점도 비슷해서,\n이런저런 컨트롤러를 구매해서 집에서 함께 게임도 하곤 합니다."
         },
         {
             "x": offset[3] + 450,
@@ -272,7 +284,7 @@ function LevelSequence() {
             "itemType": "item",
             "itemKey": "ring",
             "rewardTextureKey": "picture-ring",
-            "rewardText": "그리고 512일이 되던 때, \n앞으로 평생 함께하기로 약속했답니다."
+            "rewardText": "그리고 512일이 되던 즈음, \n앞으로 평생을 함께하기로 약속했습니다."
         },
         {
             "x": offset[4] + 1500,
@@ -283,8 +295,8 @@ function LevelSequence() {
             "rewardText": "각각 고양이 1마리의 집사였던 우리들이 만나, \n이제 고양이 2마리의 집사가 되려고 합니다."
         },
         {
-            "x": offset[4] + 2300,
-            "y": 300.0,
+            "x": offset[4] + 2100,
+            "y": 250.0,
             "itemType": "item",
             "itemKey": "heart",
             "rewardTextureKey": "picture-heart",

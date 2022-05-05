@@ -40,7 +40,7 @@ even for commercial purposes, all without asking permission:
 http://creativecommons.org/publicdomain/zero/1.0/
 Get more resources at ansimuz.com, Spread the word!
                 `,
-                15
+                22
             )
             container.add(licenseText);
         },
